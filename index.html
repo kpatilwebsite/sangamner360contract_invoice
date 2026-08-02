@@ -1,0 +1,1397 @@
+<!doctype html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>प्रकल्प करार व कामाचे स्वरूप - Sangamner 360</title>
+<style>
+/* ═══════════ TOKENS ═══════════ */
+:root{
+  --ink:#16213A; --ink-soft:#3A4560; --muted:#6B7189; --faint:#8D93A8;
+  --paper:#F6F7FB; --surface:#FFFFFF; --band:#F1F3F9;
+  --line:#DFE3EE; --line-strong:#C3C9DC;
+  --indigo:#2B3F80; --indigo-soft:#EDF0F9;
+  --bronze:#9A6A1F; --bronze-soft:#FBF3E3;
+  --sage:#2F6B4F; --sage-soft:#E9F3ED;
+  --rust:#A33A2A; --rust-soft:#FBEDEA;
+  --serif: Georgia,"Nirmala UI","Noto Serif Devanagari","Times New Roman",serif;
+  --sans: "Nirmala UI","Noto Sans Devanagari","Segoe UI",-apple-system,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#E4E7F0; --ink-soft:#C2C8DA; --muted:#959CB4; --faint:#7A8199;
+    --paper:#0B0F1B; --surface:#151B2C; --band:#1C2337;
+    --line:#2A3149; --line-strong:#3A4363;
+    --indigo:#8FA5E8; --indigo-soft:#1C2440;
+    --bronze:#D9A855; --bronze-soft:#2C2313;
+    --sage:#6FBE92; --sage-soft:#16281F;
+    --rust:#E38878; --rust-soft:#2B1815;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E4E7F0; --ink-soft:#C2C8DA; --muted:#959CB4; --faint:#7A8199;
+  --paper:#0B0F1B; --surface:#151B2C; --band:#1C2337;
+  --line:#2A3149; --line-strong:#3A4363;
+  --indigo:#8FA5E8; --indigo-soft:#1C2440;
+  --bronze:#D9A855; --bronze-soft:#2C2313;
+  --sage:#6FBE92; --sage-soft:#16281F;
+  --rust:#E38878; --rust-soft:#2B1815;
+}
+:root[data-theme="light"]{
+  --ink:#16213A; --ink-soft:#3A4560; --muted:#6B7189; --faint:#8D93A8;
+  --paper:#F6F7FB; --surface:#FFFFFF; --band:#F1F3F9;
+  --line:#DFE3EE; --line-strong:#C3C9DC;
+  --indigo:#2B3F80; --indigo-soft:#EDF0F9;
+  --bronze:#9A6A1F; --bronze-soft:#FBF3E3;
+  --sage:#2F6B4F; --sage-soft:#E9F3ED;
+  --rust:#A33A2A; --rust-soft:#FBEDEA;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:9.5rem}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15.5px; line-height:1.6; font-variant-numeric:tabular-nums}
+
+/* ═══════════ CONTROL BAR ═══════════ */
+.bar{position:sticky; top:0; z-index:60; background:var(--surface);
+  border-bottom:1px solid var(--line); box-shadow:0 1px 3px rgba(20,30,60,.04)}
+.bar__top{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  padding:.6rem clamp(.75rem,3vw,2rem); max-width:78rem; margin:0 auto}
+.bar__logo{width:2.7rem; height:2.7rem; flex-shrink:0}
+.bar__id{font-family:var(--serif); font-size:.92rem; font-weight:700; color:var(--indigo); line-height:1.25}
+.bar__id span{display:block; font-family:var(--sans); font-size:.65rem; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--faint)}
+.bar__spacer{margin-left:auto}
+.search{position:relative; flex:1 1 13rem; max-width:20rem; min-width:9rem}
+.search input{width:100%; font-family:var(--sans); font-size:.85rem; color:var(--ink);
+  padding:.5rem .75rem .5rem 2rem; border:1px solid var(--line-strong);
+  border-radius:3px; background:var(--band)}
+.search input:focus{outline:2px solid var(--indigo); outline-offset:1px; background:var(--surface)}
+.search::before{content:"⌕"; position:absolute; left:.6rem; top:50%; transform:translateY(-50%);
+  color:var(--faint); font-size:1.05rem; pointer-events:none}
+.btn{font-family:var(--sans); font-size:.82rem; font-weight:600; padding:.5rem .9rem;
+  border-radius:3px; cursor:pointer; border:1px solid var(--line-strong);
+  background:var(--surface); color:var(--ink); white-space:nowrap; transition:background .15s,border-color .15s}
+.btn:hover{background:var(--band); border-color:var(--indigo)}
+.btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px}
+.btn--primary{background:var(--indigo); border-color:var(--indigo); color:#fff}
+.btn--primary:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+
+/* nav buttons */
+.nav{border-top:1px solid var(--line); background:var(--band)}
+.nav__in{display:flex; gap:.35rem; overflow-x:auto; padding:.5rem clamp(.75rem,3vw,2rem);
+  max-width:78rem; margin:0 auto; scrollbar-width:thin}
+.nav a{flex-shrink:0; font-size:.79rem; font-weight:600; text-decoration:none;
+  color:var(--ink-soft); padding:.4rem .7rem; border-radius:3px;
+  border:1px solid transparent; white-space:nowrap; transition:all .15s}
+.nav a:hover{background:var(--surface); border-color:var(--line-strong); color:var(--indigo)}
+.nav a.is-active{background:var(--indigo); border-color:var(--indigo); color:#fff}
+.nav a b{font-weight:700; opacity:.65; margin-right:.3rem}
+.nav a.is-active b{opacity:.8}
+.nav a.nav__go{background:var(--sage); border-color:var(--sage); color:#fff}
+.nav a.nav__go:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+.nav a.nav__go b{opacity:.85}
+
+/* ═══════════ SHELL ═══════════ */
+.sheet{max-width:min(72rem,100% - 1.5rem); margin:1.75rem auto 4rem;
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:clamp(1.25rem,4vw,3.25rem)}
+
+/* ═══════════ LETTERHEAD ═══════════ */
+.letterhead{display:flex; align-items:center; justify-content:space-between;
+  gap:1rem 2rem; flex-wrap:wrap; padding-bottom:1.25rem; margin-bottom:2rem;
+  border-bottom:2px solid var(--line-strong)}
+.letterhead__logo{width:7.4rem; height:7.4rem; flex-shrink:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.letterhead__org{text-align:right; margin-left:auto}
+.letterhead__name{font-family:var(--serif); font-size:1.1rem; font-weight:700;
+  color:var(--ink); margin:0 0 .2rem}
+.letterhead__meta{margin:0; font-size:.84rem; line-height:1.6; color:var(--muted)}
+.letterhead__meta a{color:var(--indigo); text-decoration:none}
+@media (max-width:520px){.letterhead{justify-content:center}.letterhead__org{text-align:center;margin-left:0}}
+
+/* ═══════════ MASTHEAD ═══════════ */
+.masthead{text-align:center; padding-bottom:1.75rem; margin-bottom:2rem;
+  border-bottom:3px double var(--line-strong)}
+.masthead__eyebrow{font-size:.68rem; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--bronze); margin:0 0 .8rem}
+.masthead__title{font-family:var(--serif); font-size:clamp(1.55rem,4vw,2.35rem);
+  line-height:1.2; font-weight:700; margin:0 0 .35rem; text-wrap:balance}
+.masthead__sub{font-family:var(--serif); font-style:italic;
+  font-size:clamp(.98rem,2.2vw,1.15rem); color:var(--indigo); margin:0}
+
+/* ═══════════ SECTIONS ═══════════ */
+.sec{margin-bottom:3.25rem; scroll-margin-top:9.5rem}
+.sec__band{display:flex; align-items:baseline; gap:.9rem; flex-wrap:wrap;
+  background:var(--indigo); color:#fff; padding:.75rem 1.15rem; margin-bottom:1.5rem;
+  border-radius:3px 3px 0 0}
+.sec__n{font-size:.68rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; opacity:.72; flex-shrink:0}
+.sec__t{font-family:var(--serif); font-size:1.1rem; font-weight:700; margin:0}
+.sec__lead{font-size:.9rem; color:var(--muted); margin:0 0 1.25rem; max-width:70ch}
+
+/* table caption-heading above each table */
+.th{display:flex; align-items:baseline; gap:.6rem; flex-wrap:wrap;
+  margin:1.9rem 0 .6rem}
+.th:first-of-type{margin-top:0}
+.th__n{font-family:var(--serif); font-size:.78rem; font-weight:700; color:#fff;
+  background:var(--bronze); padding:.12rem .5rem; border-radius:2px; flex-shrink:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.th__t{font-size:.98rem; font-weight:700; color:var(--ink); margin:0}
+.th__note{font-size:.82rem; color:var(--muted); margin:0 0 .6rem; max-width:70ch}
+
+/* ═══════════ TABLES ═══════════ */
+.tbl{overflow-x:auto; margin:0 0 .5rem; border:1px solid var(--line); border-radius:3px}
+table{border-collapse:collapse; width:100%; font-size:.86rem; min-width:30rem}
+thead th{background:var(--band); text-align:left; font-weight:700; color:var(--ink);
+  padding:.6rem .8rem; border-bottom:2px solid var(--line-strong);
+  font-size:.73rem; letter-spacing:.05em; text-transform:uppercase; vertical-align:bottom;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+tbody td{padding:.55rem .8rem; border-bottom:1px solid var(--line);
+  color:var(--ink-soft); vertical-align:top; line-height:1.5}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--band)}
+td.num,th.num{text-align:right; white-space:nowrap}
+td.num{font-weight:600; color:var(--ink)}
+td.c,th.c{text-align:center}
+td.k{font-weight:600; color:var(--ink); width:1%; white-space:nowrap}
+tr.total td{background:var(--bronze-soft); font-weight:700; color:var(--ink);
+  border-top:2px solid var(--bronze); border-bottom:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+tr.sub td{background:var(--indigo-soft); font-weight:700; color:var(--indigo);
+  font-size:.75rem; letter-spacing:.08em; text-transform:uppercase;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+caption{caption-side:bottom; text-align:left; font-size:.79rem; color:var(--muted);
+  padding:.55rem .8rem; line-height:1.55; background:var(--band);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+caption strong{color:var(--ink)}
+
+/* ═══════════ CHIPS ═══════════ */
+.chip{display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.03em;
+  padding:.1rem .45rem; border-radius:2px; white-space:nowrap;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.chip--yes{background:var(--sage-soft); color:var(--sage); border:1px solid var(--sage)}
+.chip--no{background:var(--rust-soft); color:var(--rust); border:1px solid var(--rust)}
+.chip--tent{background:var(--bronze-soft); color:var(--bronze); border:1px solid var(--bronze)}
+.chip--info{background:var(--indigo-soft); color:var(--indigo); border:1px solid var(--indigo)}
+
+/* ═══════════ CALLOUT ═══════════ */
+.note{border-left:3px solid var(--indigo); background:var(--indigo-soft);
+  padding:.85rem 1.1rem; margin:.9rem 0; border-radius:0 3px 3px 0; font-size:.87rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.note--warn{border-left-color:var(--bronze); background:var(--bronze-soft)}
+.note--yes{border-left-color:var(--sage); background:var(--sage-soft)}
+.note--no{border-left-color:var(--rust); background:var(--rust-soft)}
+.note__t{display:block; font-size:.7rem; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; margin-bottom:.4rem; color:var(--indigo)}
+.note--warn .note__t{color:var(--bronze)}
+.note--yes .note__t{color:var(--sage)}
+.note--no .note__t{color:var(--rust)}
+.note p{margin:0 0 .45rem; color:var(--ink-soft)}
+.note p:last-child{margin-bottom:0}
+
+/* ═══════════ ACCEPTANCE ═══════════ */
+.accept{border:2px solid var(--indigo); border-radius:4px; padding:1.4rem 1.5rem;
+  background:var(--indigo-soft); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept.is-locked{border-color:var(--sage); background:var(--sage-soft)}
+.accept__h{font-family:var(--serif); font-size:1.12rem; font-weight:700; color:var(--ink);
+  margin:0 0 .4rem}
+.accept__lead{font-size:.87rem; color:var(--ink-soft); margin:0 0 1.15rem; max-width:68ch}
+.accept__grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+  gap:.85rem; margin-bottom:1.25rem}
+.accept__field{display:flex; flex-direction:column; gap:.3rem}
+.accept__field span{font-size:.72rem; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted)}
+.accept__field input{font-family:var(--sans); font-size:.98rem; color:var(--ink);
+  padding:.6rem .75rem; border:1.5px solid var(--line-strong); border-radius:3px;
+  background:var(--surface); width:100%}
+.accept__field input:focus{outline:2px solid var(--indigo); outline-offset:1px}
+.accept__step{font-size:.72rem; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 .45rem}
+
+/* big, unmistakable tick */
+.accept__check{display:flex; gap:1rem; align-items:flex-start; cursor:pointer;
+  background:var(--surface); border:2px solid var(--indigo); border-radius:4px;
+  padding:1rem 1.1rem; font-size:.9rem; color:var(--ink-soft); line-height:1.6;
+  transition:border-color .15s, background .15s}
+.accept__check:hover{background:var(--band)}
+.accept__check input{position:absolute; opacity:0; width:0; height:0}
+.accept__box{flex-shrink:0; width:2rem; height:2rem; border:2.5px solid var(--indigo);
+  border-radius:4px; background:var(--surface); position:relative; margin-top:.05rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept__box::after{content:"✓"; position:absolute; inset:0; display:flex;
+  align-items:center; justify-content:center; font-size:1.5rem; font-weight:700;
+  color:#fff; opacity:0; transform:scale(.5); transition:opacity .15s, transform .15s}
+.accept__check input:checked ~ .accept__box{background:var(--sage); border-color:var(--sage)}
+.accept__check input:checked ~ .accept__box::after{opacity:1; transform:scale(1)}
+.accept__check input:focus-visible ~ .accept__box{outline:3px solid var(--indigo); outline-offset:2px}
+.accept__txt{flex:1}
+
+.accept__actions{display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin-top:1.15rem}
+.accept__actions .btn:disabled{opacity:.4; cursor:not-allowed}
+.btn--lock{background:var(--sage); border-color:var(--sage); color:#fff; font-size:.88rem;
+  padding:.6rem 1.15rem}
+.btn--lock:hover:not(:disabled){background:var(--ink); border-color:var(--ink); color:#fff}
+.accept__hint{font-size:.82rem; color:var(--bronze); margin:.7rem 0 0; font-weight:600}
+.accept__msg{font-size:.82rem; font-weight:600; color:var(--sage)}
+
+/* locked stamp */
+.accept__stamp{display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  padding:1rem 1.15rem; border:2.5px solid var(--sage); border-radius:4px;
+  background:var(--surface); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept__tickmark{font-size:2.1rem; line-height:1; color:var(--sage); font-weight:700; flex-shrink:0}
+.accept__stampin{flex:1; min-width:11rem}
+.accept__stampin strong{display:block; font-family:var(--serif); font-size:1.05rem;
+  color:var(--ink); margin-bottom:.15rem}
+.accept__stampin span{font-size:.82rem; color:var(--muted)}
+.accept__lockbadge{font-size:.7rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--sage); border:1.5px solid var(--sage); border-radius:3px; padding:.3rem .6rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept__locked{font-size:.84rem; color:var(--ink-soft); margin:.85rem 0 0}
+.accept__next{margin-top:1.1rem; padding:1rem 1.15rem; border:2px solid var(--bronze);
+  border-radius:4px; background:var(--bronze-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept__nextt{display:block; font-size:.7rem; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--bronze); margin-bottom:.4rem}
+.accept__next p{font-size:.87rem; color:var(--ink-soft); margin:0 0 .85rem}
+.btn--invoice{display:inline-block; text-decoration:none; background:var(--bronze);
+  border-color:var(--bronze); color:#fff; font-size:.88rem; padding:.6rem 1.1rem}
+.btn--invoice:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+.accept__fine{font-size:.77rem; color:var(--muted); margin:1.1rem 0 0; line-height:1.6;
+  padding-top:.85rem; border-top:1px solid var(--line)}
+
+/* ═══════════ FOOTER ═══════════ */
+.foot{margin-top:3rem; padding-top:1.5rem; border-top:3px double var(--line-strong);
+  display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between; align-items:flex-start}
+.foot__block{font-size:.83rem; color:var(--muted); line-height:1.65}
+.foot__logo{width:4.8rem; height:4.8rem; display:block; margin:0 0 .45rem -.3rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.foot__block strong{display:block; font-family:var(--serif); font-size:.98rem;
+  color:var(--ink); margin-bottom:.2rem}
+.foot__block a{color:var(--indigo); text-decoration:none}
+.foot__seal{font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--bronze); border:1px solid var(--bronze); padding:.5rem .85rem; border-radius:3px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+.no-hit{display:none !important}
+#empty{display:none; text-align:center; padding:2.5rem 1rem; color:var(--muted); font-size:.9rem}
+#empty.show{display:block}
+.print-only{display:none}
+
+/* ═══════════ PRINT ═══════════ */
+@page{size:A4; margin:13mm 12mm}
+@media print{
+  :root{
+    --ink:#111827; --ink-soft:#1F2937; --muted:#4B5563; --faint:#6B7280;
+    --paper:#fff; --surface:#fff; --band:#F3F4F8;
+    --line:#C9CEDD; --line-strong:#94A0BE;
+    --indigo:#1F3168; --indigo-soft:#EEF1F9;
+    --bronze:#7A5312; --bronze-soft:#FAF4E6;
+    --sage:#245840; --sage-soft:#EBF4EF;
+    --rust:#8A2E20; --rust-soft:#FBEEEB;
+  }
+  body{background:#fff; font-size:9.6pt; line-height:1.5}
+  .bar{display:none !important}
+  .print-only{display:block}
+  .sheet{max-width:none; margin:0; padding:0; border:0}
+  .sec__band{background:var(--indigo) !important; color:#fff !important;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
+    break-after:avoid; page-break-after:avoid}
+  .sec{margin-bottom:1.6rem}
+  .sec--break{break-before:page; page-break-before:always}
+  .tbl,table,.note,.letterhead,.foot{break-inside:avoid; page-break-inside:avoid}
+  tr{break-inside:avoid; page-break-inside:avoid}
+  thead{display:table-header-group}
+  .th,.th__note,.sec__lead{break-after:avoid; page-break-after:avoid}
+  .letterhead__logo{width:6.3rem; height:6.3rem}
+  a{color:inherit; text-decoration:none}
+  .screen-only,.accept__actions,.accept__hint,.accept__next{display:none !important}
+  .accept{break-inside:avoid; page-break-inside:avoid}
+  .accept__field input,.accept__check,.accept__stamp{background:#fff}
+  .accept__box{width:1.5rem; height:1.5rem}
+  .accept__box::after{font-size:1.1rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important; transition:none !important}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LOGO SYMBOL ═══════════ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <linearGradient id="msRing" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#FFF7CB"/>
+      <stop offset="20%" stop-color="#EAC661"/>
+      <stop offset="45%" stop-color="#A97C22"/>
+      <stop offset="68%" stop-color="#F4DE95"/>
+      <stop offset="86%" stop-color="#B8892A"/>
+      <stop offset="100%" stop-color="#8A6316"/>
+    </linearGradient>
+    <radialGradient id="msField" cx="50%" cy="44%" r="72%">
+      <stop offset="0%" stop-color="#4C3718"/>
+      <stop offset="52%" stop-color="#2A1D0C"/>
+      <stop offset="100%" stop-color="#0D0803"/>
+    </radialGradient>
+    <linearGradient id="msSunGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF2600"/>
+      <stop offset="40%" stop-color="#FF5A00"/>
+      <stop offset="70%" stop-color="#FFB200"/>
+      <stop offset="100%" stop-color="#FFF287"/>
+    </linearGradient>
+    <linearGradient id="msWord" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8977"/>
+      <stop offset="30%" stop-color="#F63421"/>
+      <stop offset="100%" stop-color="#C3130A"/>
+    </linearGradient>
+    <symbol id="midsun-logo" viewBox="0 0 500 500">
+      <circle cx="250" cy="250" r="246" fill="url(#msRing)"/>
+      <circle cx="250" cy="250" r="229" fill="#150D05"/>
+      <circle cx="250" cy="250" r="223" fill="url(#msField)"/>
+      <g fill="#E8301A">
+        <path d="M245,163 L255,163 L250,113 Z" transform="rotate(-90 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(-80 250 247)"/>
+        <path d="M245,163 L255,163 L250,111 Z" transform="rotate(-70 250 247)"/>
+        <path d="M245,163 L255,163 L250,103 Z" transform="rotate(-60 250 247)"/>
+        <path d="M245,163 L255,163 L250,109 Z" transform="rotate(-50 250 247)"/>
+        <path d="M245,163 L255,163 L250,101 Z" transform="rotate(-40 250 247)"/>
+        <path d="M245,163 L255,163 L250,107 Z" transform="rotate(-30 250 247)"/>
+        <path d="M245,163 L255,163 L250,99 Z"  transform="rotate(-20 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(-10 250 247)"/>
+        <path d="M245,163 L255,163 L250,97 Z"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(10 250 247)"/>
+        <path d="M245,163 L255,163 L250,99 Z"  transform="rotate(20 250 247)"/>
+        <path d="M245,163 L255,163 L250,107 Z" transform="rotate(30 250 247)"/>
+        <path d="M245,163 L255,163 L250,101 Z" transform="rotate(40 250 247)"/>
+        <path d="M245,163 L255,163 L250,109 Z" transform="rotate(50 250 247)"/>
+        <path d="M245,163 L255,163 L250,103 Z" transform="rotate(60 250 247)"/>
+        <path d="M245,163 L255,163 L250,111 Z" transform="rotate(70 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(80 250 247)"/>
+        <path d="M245,163 L255,163 L250,113 Z" transform="rotate(90 250 247)"/>
+      </g>
+      <path d="M174,247 A76,76 0 0 1 326,247 Z" fill="url(#msSunGrad)"/>
+      <g font-family="'Arial Black','Franklin Gothic Heavy',Impact,sans-serif" font-weight="900" fill="url(#msWord)">
+        <text x="234" y="313" font-size="80" text-anchor="end">MID</text>
+        <text x="272" y="313" font-size="80" text-anchor="start">SUN</text>
+      </g>
+      <rect x="240" y="277" width="26" height="14" fill="url(#msWord)"/>
+      <text x="250" y="353" text-anchor="middle" fill="#F2A93C" font-size="25"
+            font-family="Arial,Helvetica,sans-serif" font-weight="700"
+            letter-spacing="2.4">A HOLDING COMPANY</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ═══════════ CONTROL BAR ═══════════ -->
+<div class="bar">
+  <div class="bar__top">
+    <svg class="bar__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN"><use href="#midsun-logo"/></svg>
+    <div class="bar__id">Ghorpadepatil &amp; Team<span>Project Agreement</span></div>
+    <div class="bar__spacer"></div>
+    <div class="search">
+      <input type="search" id="q" placeholder="करारात शोधा… (उदा. Payment, Hosting, Warranty)" aria-label="Search the agreement">
+    </div>
+    <button class="btn" id="themeBtn" type="button">डार्क / लाइट</button>
+    <button class="btn btn--primary" id="pdfBtn" type="button">⭳ Download PDF</button>
+  </div>
+  <nav class="nav" aria-label="विभाग">
+    <div class="nav__in" id="navIn">
+      <a href="#s0"><b>०</b>सारांश</a>
+      <a href="#s1"><b>१</b>व्याप्ती व Features</a>
+      <a href="#s2"><b>२</b>व्याप्तीबाहेर</a>
+      <a href="#s3"><b>३</b>वेळापत्रक</a>
+      <a href="#s4"><b>४</b>देयक अटी</a>
+      <a href="#s5"><b>५</b>जबाबदाऱ्या</a>
+      <a href="#s6"><b>६</b>अटी व शर्ती</a>
+      <a href="#s7"><b>७</b>स्वीकृतीची पद्धत</a>
+      <a href="#s8"><b>A</b>Hosting खर्च</a>
+      <a href="#s9"><b>B</b>किंमत विभागणी</a>
+      <a href="#s10" class="nav__go"><b>✓</b>संमती द्या</a>
+    </div>
+  </nav>
+</div>
+
+<main class="sheet">
+
+<div class="letterhead">
+  <svg class="letterhead__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN - A Holding Company"><use href="#midsun-logo"/></svg>
+  <div class="letterhead__org">
+    <p class="letterhead__name">Ghorpadepatil &amp; Team</p>
+    <p class="letterhead__meta">
+      <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+      <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+      <a href="tel:9404423429">9404423429</a> (Primary · WhatsApp)<br>
+      <a href="tel:9684008406">9684008406</a> (Alternative Call / WhatsApp)
+    </p>
+  </div>
+</div>
+
+<header class="masthead">
+  <p class="masthead__eyebrow">Project Agreement &amp; Scope of Work</p>
+  <h1 class="masthead__title">प्रकल्प करार व कामाचे स्वरूप</h1>
+  <p class="masthead__sub">Sangamner 360</p>
+</header>
+
+<div id="empty">या शब्दासाठी कोणतीही नोंद सापडली नाही. दुसरा शब्द वापरून पहा.</div>
+
+<div id="doc">
+
+<!-- ══════════ ० · सारांश ══════════ -->
+<section class="sec" id="s0">
+  <div class="sec__band"><span class="sec__n">विभाग ०</span><h2 class="sec__t">करार सारांश - एका दृष्टिक्षेपात</h2></div>
+  <p class="sec__lead">संपूर्ण कराराचे सर्व महत्त्वाचे मुद्दे खालील एकाच तक्त्यात दिले आहेत. तपशिलासाठी संबंधित विभाग पहावा.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>बाब</th><th>तपशील</th><th>विभाग</th></tr></thead>
+      <tbody>
+        <tr class="sub"><td colspan="3">पक्षकार व दस्तऐवज</td></tr>
+        <tr><td class="k">Client</td><td>Mr. Pritam Jadhav</td><td>-</td></tr>
+        <tr><td class="k">Developer</td><td>Ghorpadepatil &amp; Team<br>kgpatilmail@gmail.com · midsungroupmail@gmail.com<br>9404423429 (Primary · WhatsApp)</td><td>-</td></tr>
+        <tr><td class="k">प्रकल्पाचे नाव</td><td>Sangamner 360</td><td>-</td></tr>
+        <tr><td class="k">दस्तऐवज</td><td>करार (Contract) · दिनांक 02 / 08 / 2026</td><td>-</td></tr>
+        <tr><td class="k">दस्तऐवज स्थिती</td><td><span class="chip chip--tent">Client Confirmation Pending</span></td><td>विभाग ७</td></tr>
+
+        <tr class="sub"><td colspan="3">आर्थिक</td></tr>
+        <tr><td class="k">एकूण प्रकल्प किंमत</td><td><strong>₹5,90,000/-</strong> (Lump-Sum, संपूर्ण प्रकल्पासाठी)</td><td>विभाग ४</td></tr>
+        <tr><td class="k">देयक पद्धत</td><td>4 टप्पे - 10% + 30% + 30% + 30%</td><td>विभाग ४</td></tr>
+        <tr><td class="k">अंतिम 30% सवलत</td><td>Delivery नंतर, मात्र <strong>1 डिसेंबर 2026</strong> पर्यंत अदा करणे बंधनकारक</td><td>विभाग ४</td></tr>
+        <tr><td class="k">Hosting व इतर खर्च</td><td>प्रकल्प किंमतीत <span class="chip chip--no">समाविष्ट नाही</span> - अंदाजे ₹38,700 पहिल्या वर्षी</td><td>Annexure A</td></tr>
+
+        <tr class="sub"><td colspan="3">वेळापत्रक</td></tr>
+        <tr><td class="k">Mobile App लक्ष्य</td><td>1 नोव्हेंबर 2026 <span class="chip chip--tent">Tentative</span> + 15 दिवस ते 1 महिना Buffer</td><td>विभाग ३</td></tr>
+        <tr><td class="k">Website पूर्ण</td><td>1 नोव्हेंबर 2026 नंतर <span class="chip chip--tent">Tentative</span></td><td>विभाग ३</td></tr>
+        <tr><td class="k">व्यवसाय नोंदणी सुरू</td><td>1 डिसेंबर 2026 <span class="chip chip--tent">Tentative</span></td><td>विभाग ३</td></tr>
+
+        <tr class="sub"><td colspan="3">सेवा व हमी</td></tr>
+        <tr><td class="k">निःशुल्क Support</td><td><strong>90 दिवस</strong> (Delivery पासून)</td><td>विभाग ६</td></tr>
+        <tr><td class="k">Bug Fix Warranty</td><td>90 दिवस · निराकरण 12 - 72 तासांत</td><td>विभाग ६</td></tr>
+        <tr><td class="k">Revision Rounds</td><td>App साठी 3 + Website साठी 3 = <strong>एकूण 6</strong></td><td>विभाग ६</td></tr>
+        <tr><td class="k">AMC (पर्यायी)</td><td>₹15,000 - ₹20,000 प्रति वर्ष</td><td>विभाग ६</td></tr>
+        <tr><td class="k">Update शुल्क</td><td>छोटे ₹5,000 - ₹10,000 · मोठे ₹15,000+</td><td>विभाग ६</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ १ · व्याप्ती ══════════ -->
+<section class="sec" id="s1">
+  <div class="sec__band"><span class="sec__n">विभाग १</span><h2 class="sec__t">कामाची व्याप्ती व Features (Scope of Work)</h2></div>
+  <p class="sec__lead">या प्रकल्पाचा उद्देश संगमनेर व परिसरातील व्यवसाय, सेवा, दुकाने, उद्योग, डॉक्टर, रुग्णालये, शैक्षणिक संस्था, हॉटेल्स, स्थानिक बातम्या व कार्यक्रम ही माहिती नागरिकांना एका आधुनिक डिजिटल प्लॅटफॉर्मवर उपलब्ध करून देणे हा आहे. खालील सर्व बाबी ₹5,90,000/- या किंमतीत समाविष्ट आहेत.</p>
+
+  <div class="th"><span class="th__n">१.१</span><h3 class="th__t">प्रकल्पात काय बनवून मिळेल (Deliverables)</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>घटक</th><th>तपशील</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td class="k">Android Application</td><td>Google Play Store वर Publish केले जाईल</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२</td><td class="k">iOS Application</td><td>Apple App Store वर Publish केले जाईल</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३</td><td class="k">Website</td><td>App स्थिर / Publish झाल्यानंतर सुरू</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">४</td><td class="k">Admin Panel</td><td>संपूर्ण Platform नियंत्रणासाठी</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">५</td><td class="k">Business Dashboard</td><td>व्यावसायिकांना स्वतःचे Profile व्यवस्थापनासाठी</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">६</td><td class="k">Backend Development</td><td><strong>Rust</strong> Architecture - Performance, Scalability व दीर्घकालीन Maintainability साठी निवडले</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">७</td><td class="k">Database Design</td><td>संपूर्ण Database रचना व विकास</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">८</td><td class="k">Testing &amp; QA</td><td>Delivery पूर्वी संपूर्ण तपासणी</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">९</td><td class="k">Deployment Assistance</td><td>Play Store व App Store Publishing सहाय्य</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१०</td><td class="k">Professional Logo Design</td><td>1 नोव्हेंबर 2026 पूर्वी अंतिम करण्याचे उद्दिष्ट</td><td class="c"><span class="chip chip--yes">Complimentary</span></td></tr>
+      </tbody>
+      <caption>तांत्रिक गरज किंवा Platform Compatibility मुळे Architecture मध्ये बदल आवश्यक झाल्यास, Developer हे Client यांच्याशी चर्चा करून समकक्ष Technology वापरू शकतील - मंजूर Functionality वर परिणाम होणार नाही.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">१.२</span><h3 class="th__t">App मधील सर्व Features</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>Feature</th><th>विभाग</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Home Dashboard</td><td>User Experience</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२</td><td>Dark / Light Mode</td><td>User Experience</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३</td><td>English &amp; Marathi Language</td><td>User Experience</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">४</td><td>OTP Login</td><td>Authentication</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">५</td><td>User Registration</td><td>Authentication</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">६</td><td>QR Support</td><td>User Experience</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">७</td><td>Contact Us</td><td>User Experience</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">८</td><td>Terms &amp; Conditions Acceptance</td><td>Authentication</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">९</td><td>Business Listings</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१०</td><td>Premium Profiles</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">११</td><td>Verified Badge</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१२</td><td>Ratings &amp; Reviews</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१३</td><td>Business ID</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१४</td><td>Business Profile</td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१५</td><td><strong>Voice Search - Mic (Keyword आधारित)</strong><br><em>उदा. “Bakery”, “Hospital”, “Dentist”, “Mall”, “Hotel”</em></td><td>Search</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१६</td><td>News</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१७</td><td>Government Schemes</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१८</td><td>Ladki Bahin</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">१९</td><td>MIDC</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२०</td><td>Schools</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२१</td><td>Hospitals</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२२</td><td>Sangamner Information</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२३</td><td>Important Contacts</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२४</td><td>Student Section</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२५</td><td>Preschool</td><td>Information</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२६</td><td>WhatsApp Integration</td><td>Connectivity</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२७</td><td>Maps Integration</td><td>Connectivity</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२८</td><td>Instagram Integration</td><td>Connectivity</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२९</td><td>Direct Calling</td><td>Connectivity</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३०</td><td>Subscription</td><td>Payments</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३१</td><td>Payment Gateway</td><td>Payments</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३२</td><td>Registration (सशुल्क नोंदणी)</td><td>Payments</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३३</td><td>Notifications</td><td>Payments</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३४</td><td>Admin Dashboard</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३५</td><td>Analytics</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३६</td><td>Advertisement Management</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">१.३</span><h3 class="th__t">Business Categories (श्रेणी)</h3></div>
+  <p class="th__note">खालील Categories App मध्ये समाविष्ट असतील. भविष्यात Client व Developer यांच्या परस्पर सहमतीने यात लहान बदल होऊ शकतात.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>Category</th><th>प्रकार</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Jobs</td><td>रोजगार</td></tr>
+        <tr><td class="num">२</td><td>Property</td><td>मालमत्ता</td></tr>
+        <tr><td class="num">३</td><td>Rental</td><td>मालमत्ता</td></tr>
+        <tr><td class="num">४</td><td>Wedding</td><td>कार्यक्रम</td></tr>
+        <tr><td class="num">५</td><td>Events</td><td>कार्यक्रम</td></tr>
+        <tr><td class="num">६</td><td>Civil</td><td>बांधकाम</td></tr>
+        <tr><td class="num">७</td><td>JCB</td><td>बांधकाम</td></tr>
+        <tr><td class="num">८</td><td>Fresh Vegetables</td><td>अन्न</td></tr>
+        <tr><td class="num">९</td><td>Organic Foods</td><td>अन्न</td></tr>
+        <tr><td class="num">१०</td><td>Cleaning</td><td>घरगुती सेवा</td></tr>
+        <tr><td class="num">११</td><td>Housemaid</td><td>घरगुती सेवा</td></tr>
+        <tr><td class="num">१२</td><td>Gruhini Services</td><td>घरगुती सेवा</td></tr>
+        <tr><td class="num">१३</td><td>Baby Care</td><td>घरगुती सेवा</td></tr>
+        <tr><td class="num">१४</td><td>Gardening</td><td>घरगुती सेवा</td></tr>
+        <tr><td class="num">१५</td><td>Electrician</td><td>तांत्रिक सेवा</td></tr>
+        <tr><td class="num">१६</td><td>Plumber</td><td>तांत्रिक सेवा</td></tr>
+        <tr><td class="num">१७</td><td>Carpenter</td><td>तांत्रिक सेवा</td></tr>
+        <tr><td class="num">१८</td><td>Mechanic</td><td>तांत्रिक सेवा</td></tr>
+        <tr><td class="num">१९</td><td>Painter</td><td>तांत्रिक सेवा</td></tr>
+        <tr><td class="num">२०</td><td>Nurse</td><td>आरोग्य</td></tr>
+        <tr><td class="num">२१</td><td>CA</td><td>व्यावसायिक सेवा</td></tr>
+        <tr><td class="num">२२</td><td>Advocate</td><td>व्यावसायिक सेवा</td></tr>
+        <tr><td class="num">२३</td><td>Architect</td><td>व्यावसायिक सेवा</td></tr>
+        <tr><td class="num">२४</td><td>Engineer</td><td>व्यावसायिक सेवा</td></tr>
+        <tr><td class="num">२५</td><td>Driver</td><td>वाहतूक</td></tr>
+        <tr><td class="num">२६</td><td>Taxi</td><td>वाहतूक</td></tr>
+        <tr><td class="num">२७</td><td>Auto Rickshaw</td><td>वाहतूक</td></tr>
+        <tr><td class="num">२८</td><td>Tours</td><td>पर्यटन</td></tr>
+        <tr><td class="num">२९</td><td>Security</td><td>इतर सेवा</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ २ · व्याप्तीबाहेर ══════════ -->
+<section class="sec" id="s2">
+  <div class="sec__band"><span class="sec__n">विभाग २</span><h2 class="sec__t">प्रकल्पात समाविष्ट नसलेल्या बाबी (Out of Scope)</h2></div>
+  <p class="sec__lead">खालील सर्व बाबी ₹5,90,000/- या प्रकल्प किंमतीमध्ये <strong>समाविष्ट नाहीत</strong>. भविष्यात यापैकी काही हवे असल्यास स्वतंत्र Quotation, Timeline व लेखी मंजुरी आवश्यक राहील.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>बाब</th><th>प्रकार</th><th>स्पष्टीकरण</th></tr></thead>
+      <tbody>
+        <tr class="sub"><td colspan="4">मार्केटिंग उपक्रम - ही Software Features नाहीत</td></tr>
+        <tr><td class="num">१</td><td>Social Media Page Management</td><td>Marketing</td><td>भविष्यात स्वतंत्र Quotation देता येईल</td></tr>
+        <tr><td class="num">२</td><td>Daily Social Media Posting</td><td>Marketing</td><td>भविष्यात स्वतंत्र Quotation देता येईल</td></tr>
+        <tr><td class="num">३</td><td>Social Media Marketing / Advertisement</td><td>Marketing</td><td>भविष्यात स्वतंत्र Quotation देता येईल</td></tr>
+        <tr><td class="num">४</td><td>Social Media Growth Strategy</td><td>Marketing</td><td>भविष्यात स्वतंत्र Quotation देता येईल</td></tr>
+        <tr><td class="num">५</td><td>Educational Reels</td><td>Marketing</td><td>Content निर्मिती - Software विकास नाही</td></tr>
+        <tr><td class="num">६</td><td>Job Alert Flex</td><td>Marketing</td><td>Print / Design काम</td></tr>
+        <tr><td class="num">७</td><td>Digital Marketing / SEO</td><td>Marketing</td><td>स्वतंत्र सेवा</td></tr>
+        <tr><td class="num">८</td><td>Content Writing</td><td>Marketing</td><td>Content Client यांनी पुरवायचे</td></tr>
+
+        <tr class="sub"><td colspan="4">AI संबंधित बाबी</td></tr>
+        <tr><td class="num">९</td><td>AI Character / AI Avatar Creation</td><td>AI</td><td>स्वतंत्र नियोजन, Subscriptions व शुल्क आवश्यक</td></tr>
+        <tr><td class="num">१०</td><td>AI Promotional / Presenter / Marketing Videos</td><td>AI</td><td>स्वतंत्र नियोजन व शुल्क आवश्यक</td></tr>
+        <tr><td class="num">११</td><td>AI Reel Generation</td><td>AI</td><td>स्वतंत्र नियोजन व शुल्क आवश्यक</td></tr>
+        <tr><td class="num">१२</td><td><strong>AI Smart Voice Search (AI Mic) - Type 2</strong><br><em>उदा. “अकोले रोडजवळचा सर्वात जास्त Rating असलेला Dentist दाखवा”</em></td><td>AI</td><td>Development ₹10,000 + दरमहा AI API शुल्क · तांत्रिक Feasibility वर अवलंबून</td></tr>
+        <tr><td class="num">१३</td><td>AI-Based Personalized Recommendations &amp; Ads</td><td>AI</td><td>Feasibility, Privacy Compliance व मंजुरीवर अवलंबून · स्वतंत्र Quotation</td></tr>
+        <tr><td class="num">१४</td><td>AI Chatbot / AI Automation</td><td>AI</td><td>Package 2 चा भाग</td></tr>
+
+        <tr class="sub"><td colspan="4">भविष्यातील विस्तार (Package 2)</td></tr>
+        <tr><td class="num">१५</td><td>Marketplace Expansion</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
+        <tr><td class="num">१६</td><td>Future Premium Modules</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
+        <tr><td class="num">१७</td><td>ERP / Billing Software</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
+        <tr><td class="num">१८</td><td>CRM Software</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
+
+        <tr class="sub"><td colspan="4">इतर</td></tr>
+        <tr><td class="num">१९</td><td>Hosting, Domain, API व इतर Third-Party खर्च</td><td>External</td><td>Annexure A पहा - Client यांनी थेट अदा करावयाचे</td></tr>
+        <tr><td class="num">२०</td><td>करारात नमूद नसलेले इतर Modules / Features</td><td>Other</td><td>Change Request म्हणून हाताळले जाईल</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">२.१</span><h3 class="th__t">Branding व Taglines - तात्पुरते (Tentative)</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>प्रकार</th><th>सद्य प्रस्तावित मजकूर</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Platform Tagline</td><td><em>“संगमनेरकरांसाठी एक हक्काचं आणि Reliable Digital Platform”</em></td><td class="c"><span class="chip chip--tent">Tentative</span></td></tr>
+        <tr><td class="k">Brand Tagline</td><td><em>“For Sangamner, By Sangamner”</em></td><td class="c"><span class="chip chip--tent">Tentative</span></td></tr>
+        <tr><td class="k">इतर</td><td>Marketing Slogans, Promotional Text, Branding Content</td><td class="c"><span class="chip chip--tent">Tentative</span></td></tr>
+      </tbody>
+      <caption>अंतिम Branding Content हे Implementation पूर्वी Client यांच्याकडून निश्चित करण्यात येईल.</caption>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ३ · वेळापत्रक ══════════ -->
+<section class="sec" id="s3">
+  <div class="sec__band"><span class="sec__n">विभाग ३</span><h2 class="sec__t">कामाचे व देयकाचे एकत्रित वेळापत्रक</h2></div>
+  <p class="sec__lead">कोणत्या टप्प्यावर कोणते काम होईल आणि त्या टप्प्यावर किती देयक अपेक्षित आहे - दोन्ही एकाच तक्त्यात दिले आहे.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">टप्पा</th><th>कामाचे स्वरूप</th><th>अंदाजित कालावधी</th><th class="num">देयक</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="num">०</td><td class="k">Advance Payment</td><td>काम सुरू होण्यापूर्वी</td><td class="num">10%<br>₹59,000</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">१</td><td>Requirement Discussion व Project Planning</td><td>३ - ५ कामकाजाचे दिवस</td><td class="num">-</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">२</td><td class="k">UI / UX Design</td><td>७ - १० कामकाजाचे दिवस</td><td class="num">30%<br>₹1,77,000<br><em>Design मंजुरीनंतर</em></td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">३</td><td>Rust Backend Development</td><td>संपूर्ण विकास प्रक्रियेदरम्यान</td><td class="num">-</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">४</td><td>Admin Panel व Business Dashboard</td><td>संपूर्ण विकास प्रक्रियेदरम्यान</td><td class="num">-</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">५</td><td>Android Application Development</td><td>मुख्य विकास टप्पा</td><td class="num">-</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">६</td><td class="k">iOS Application Development</td><td>Android सोबत समांतर</td><td class="num">30%<br>₹1,77,000<br><em>Development पूर्ण झाल्यावर</em></td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">७</td><td>Internal Testing व Quality Check</td><td>अंतिम विकास टप्पा</td><td class="num">-</td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">८</td><td class="k">Client Review व Revision</td><td>Testing नंतर</td><td class="num">30%<br>₹1,77,000<br><em>Final Delivery पूर्वी</em></td><td class="c"><span class="chip chip--yes">Confirmed</span></td></tr>
+        <tr><td class="num">९</td><td>Google Play Store Publishing</td><td>अंतिम मंजुरीनंतर</td><td class="num">-</td><td class="c"><span class="chip chip--tent">Play Store Review वर अवलंबून</span></td></tr>
+        <tr><td class="num">१०</td><td>Apple App Store Publishing</td><td>अंतिम मंजुरीनंतर</td><td class="num">-</td><td class="c"><span class="chip chip--tent">App Store Review वर अवलंबून</span></td></tr>
+        <tr><td class="num">११</td><td>Website Development</td><td>App स्थिर होऊन Publish झाल्यानंतर सुरू</td><td class="num">-</td><td class="c"><span class="chip chip--tent">पूर्ण होणे 1 Nov 2026 नंतर</span></td></tr>
+        <tr class="total"><td class="num">-</td><td>एकूण</td><td>-</td><td class="num">100%<br>₹5,90,000</td><td class="c">-</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">३.१</span><h3 class="th__t">महत्त्वाच्या तारखा</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>घटना</th><th>तारीख</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Mobile Application पूर्ण करण्याचे लक्ष्य</td><td>1 नोव्हेंबर 2026</td><td class="c"><span class="chip chip--tent">Tentative Target</span></td></tr>
+        <tr><td class="k">राखीव Buffer कालावधी</td><td>15 दिवस ते 1 महिना</td><td class="c"><span class="chip chip--info">गुणवत्तेसाठी राखीव</span></td></tr>
+        <tr><td class="k">Website पूर्ण होणे</td><td>1 नोव्हेंबर 2026 नंतर</td><td class="c"><span class="chip chip--tent">Tentative</span></td></tr>
+        <tr><td class="k">अंतिम 30% देयकाची शेवटची तारीख</td><td>1 डिसेंबर 2026</td><td class="c"><span class="chip chip--yes">बंधनकारक</span></td></tr>
+        <tr><td class="k">वार्षिक व्यवसाय नोंदणी सुरू</td><td>1 डिसेंबर 2026</td><td class="c"><span class="chip chip--tent">Tentative</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note note--warn">
+    <span class="note__t">Buffer म्हणजे विलंब नव्हे</span>
+    <p>Testing, Bug Fixing, Review Cycles, Play Store / App Store Approval, अनपेक्षित तांत्रिक अडचणी आणि Client Revisions सामावून घेण्यासाठी 15 दिवस ते 1 महिना Buffer राखीव ठेवला आहे. याचा अर्थ प्रकल्पास विलंब होईलच असे नाही - Team चे लक्ष्य शक्य तितक्या लवकर काम पूर्ण करणे हेच आहे.</p>
+  </div>
+
+  <div class="th"><span class="th__n">३.२</span><h3 class="th__t">वेळापत्रकावर परिणाम करणारे घटक</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>घटक</th><th>जबाबदारी</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>वेळेत Approvals देणे</td><td>Client</td></tr>
+        <tr><td class="num">२</td><td>वेळेत Payments करणे</td><td>Client</td></tr>
+        <tr><td class="num">३</td><td>Content, Images व Documents वेळेत पुरवणे</td><td>Client</td></tr>
+        <tr><td class="num">४</td><td>Testing व Bug Fixing</td><td>Developer</td></tr>
+        <tr><td class="num">५</td><td>Play Store Review प्रक्रिया</td><td>Google (नियंत्रणाबाहेर)</td></tr>
+        <tr><td class="num">६</td><td>App Store Review प्रक्रिया</td><td>Apple (नियंत्रणाबाहेर)</td></tr>
+        <tr><td class="num">७</td><td>इतर Third-Party Approvals</td><td>संबंधित कंपनी (नियंत्रणाबाहेर)</td></tr>
+      </tbody>
+      <caption>Client कडून माहिती, Content किंवा मंजुरीमध्ये विलंब झाल्यास प्रकल्पाचे वेळापत्रक <strong>आपोआप त्या प्रमाणात पुढे ढकलले जाईल</strong>.</caption>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ४ · देयक अटी ══════════ -->
+<section class="sec" id="s4">
+  <div class="sec__band"><span class="sec__n">विभाग ४</span><h2 class="sec__t">आर्थिक अटी (Payment Terms)</h2></div>
+
+  <div class="th"><span class="th__n">४.१</span><h3 class="th__t">प्रकल्पाची किंमत व देयक टप्पे</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">टप्पा</th><th>केव्हा अदा करावे</th><th class="num">टक्केवारी</th><th class="num">रक्कम</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Advance - Development सुरू होण्यापूर्वी</td><td class="num">10%</td><td class="num">₹59,000</td></tr>
+        <tr><td class="num">२</td><td>UI / UX Design मंजुरीनंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
+        <tr><td class="num">३</td><td>Development पूर्ण झाल्यानंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
+        <tr><td class="num">४</td><td>Testing नंतर व Final Delivery पूर्वी</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
+        <tr class="total"><td class="num">-</td><td>एकूण प्रकल्प किंमत (Lump-Sum)</td><td class="num">100%</td><td class="num">₹5,90,000</td></tr>
+      </tbody>
+      <caption>ही रक्कम संपूर्ण प्रकल्पासाठी एकत्रित निश्चित करण्यात आली आहे. करारात नमूद कोणत्याही सेवेसाठी स्वतंत्र किंमत लागू राहणार नाही.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">४.२</span><h3 class="th__t">देयकाचे मूलभूत नियम</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>नियम</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Development चे काम केवळ <strong>10% Advance Payment</strong> प्राप्त झाल्यानंतरच सुरू करण्यात येईल.</td></tr>
+        <tr><td class="num">२</td><td>प्रत्येक Milestone Payment <strong>पुढील टप्पा सुरू होण्यापूर्वी</strong> पूर्णपणे भरणे आवश्यक राहील.</td></tr>
+        <tr><td class="num">३</td><td>Server, Hosting व Admin Panel चे Owner-level Access व Credentials चे Transfer सर्व प्रलंबित Payments भरल्यानंतरच पूर्ण होईल <em>(Delivery बाबत खालील ४.३ मधील सवलत लागू)</em>.</td></tr>
+        <tr><td class="num">४</td><td>प्रत्येक प्राप्त देयकासाठी Invoice किंवा Payment Receipt उपलब्ध करून देण्यात येईल.</td></tr>
+        <tr><td class="num">५</td><td>Client कडून माहिती, Content किंवा Approval वेळेत न मिळाल्यास Timeline व Payment Schedule परस्पर संमतीने पुढे ढकलले जाऊ शकते.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">४.३</span><h3 class="th__t">अंतिम टप्प्यातील देयकाबाबत विशेष सवलत</h3></div>
+  <p class="th__note">Client यांनी कळविल्यानुसार अंतिम देयक भरण्यास काही कालावधी लागू शकतो. त्यामुळे परस्पर संमतीने खालील सवलत मान्य करण्यात येत आहे.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>बाब</th><th>ठरलेली अट</th></tr></thead>
+      <tbody>
+        <tr><td class="k">कोणते देयक</td><td>अंतिम टप्प्यातील <strong>30% - ₹1,77,000</strong></td></tr>
+        <tr><td class="k">सवलत</td><td>Application च्या Delivery <strong>नंतर</strong> देखील अदा करता येईल</td></tr>
+        <tr><td class="k">शेवटची तारीख</td><td><strong>1 डिसेंबर 2026</strong> पर्यंत पूर्णपणे अदा करणे बंधनकारक</td></tr>
+        <tr><td class="k">उर्वरित 70% वर परिणाम</td><td>कोणताही नाही - ती देयके त्या-त्या टप्प्यावर वेळेतच अदा करणे आवश्यक</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">४.४</span><h3 class="th__t">अंतिम देयक प्रलंबित असताना - काय मिळेल, काय राखीव</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>बाब</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Application ची Delivery व Testing Access</td><td class="c"><span class="chip chip--yes">लगेच उपलब्ध</span></td></tr>
+        <tr><td class="num">२</td><td>Play Store / App Store वर Publishing</td><td class="c"><span class="chip chip--yes">लगेच उपलब्ध</span></td></tr>
+        <tr><td class="num">३</td><td>Application चा प्रत्यक्ष वापर (Live Use)</td><td class="c"><span class="chip chip--yes">लगेच उपलब्ध</span></td></tr>
+        <tr><td class="num">४</td><td>90 दिवसांचा Free Support व Warranty</td><td class="c"><span class="chip chip--yes">Delivery पासून सुरू</span></td></tr>
+        <tr><td class="num">५</td><td>Server, Hosting व Database चे Owner-level Access</td><td class="c"><span class="chip chip--tent">अंतिम देयकानंतर</span></td></tr>
+        <tr><td class="num">६</td><td>Admin Panel चे Owner-level Credentials Transfer</td><td class="c"><span class="chip chip--tent">अंतिम देयकानंतर</span></td></tr>
+      </tbody>
+      <caption><strong>1 डिसेंबर 2026 नंतरही देयक प्रलंबित राहिल्यास</strong> - Developer यांना Support, Maintenance व पुढील Updates तात्पुरत्या स्थगित करण्याचा अधिकार राहील. देयक प्राप्त होताच सर्व सेवा पूर्ववत सुरू होतील.</caption>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ५ · जबाबदाऱ्या ══════════ -->
+<section class="sec" id="s5">
+  <div class="sec__band"><span class="sec__n">विभाग ५</span><h2 class="sec__t">दोन्ही पक्षांच्या जबाबदाऱ्या व संवाद</h2></div>
+
+  <div class="th"><span class="th__n">५.१</span><h3 class="th__t">कोणाची कोणती जबाबदारी</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>जबाबदारी</th><th class="c">कोण</th></tr></thead>
+      <tbody>
+        <tr class="sub"><td colspan="3">Client यांनी पुरवायच्या बाबी</td></tr>
+        <tr><td class="num">१</td><td>Logo व Branding संबंधित माहिती</td><td class="c">Client</td></tr>
+        <tr><td class="num">२</td><td>व्यवसायाची माहिती (Business Information)</td><td class="c">Client</td></tr>
+        <tr><td class="num">३</td><td>आवश्यक Images व Photos</td><td class="c">Client</td></tr>
+        <tr><td class="num">४</td><td>आवश्यक Documents</td><td class="c">Client</td></tr>
+        <tr><td class="num">५</td><td>App मधील Content व मजकूर</td><td class="c">Client</td></tr>
+        <tr><td class="num">६</td><td>Categories ची माहिती</td><td class="c">Client</td></tr>
+        <tr><td class="num">७</td><td>Contact Details व Address</td><td class="c">Client</td></tr>
+        <tr><td class="num">८</td><td>Social Media Links</td><td class="c">Client</td></tr>
+        <tr><td class="num">९</td><td>आवश्यक असल्यास Government Approvals</td><td class="c">Client</td></tr>
+        <tr><td class="num">१०</td><td>वेळेत Feedback, Approval व Payments</td><td class="c">Client</td></tr>
+
+        <tr class="sub"><td colspan="3">Developer यांच्या जबाबदाऱ्या</td></tr>
+        <tr><td class="num">११</td><td>Application चे Professional Design करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१२</td><td>चांगल्या Coding Standards चे पालन करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१३</td><td>Secure Backend विकसित करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१४</td><td>Delivery पूर्वी संपूर्ण Testing करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१५</td><td>Warranty अंतर्गत Bugs दुरुस्त करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१६</td><td>गोपनीयता (Confidentiality) राखणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१७</td><td>प्रकल्पाची Data सुरक्षित ठेवणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१८</td><td>अस्सल (Genuine) Development Practices वापरणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">१९</td><td>मंजूर Scope नुसार Application विकसित करणे</td><td class="c">Developer</td></tr>
+        <tr><td class="num">२०</td><td>Play Store व App Store Publishing साठी तांत्रिक सहाय्य</td><td class="c">Developer</td></tr>
+      </tbody>
+      <caption>हा एक <strong>Fast-Track Development Project</strong> असल्याने Client यांनी विनाविलंब प्रतिसाद देणे आवश्यक आहे. विलंबित प्रतिसादाचा थेट परिणाम Delivery Timeline वर होऊ शकतो.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">५.२</span><h3 class="th__t">संवादाचे नियम</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>बाब</th><th>तपशील</th></tr></thead>
+      <tbody>
+        <tr><td class="k">सोमवार ते शनिवार</td><td>सकाळी 6 ते संध्याकाळी 9</td></tr>
+        <tr><td class="k">रविवार व सार्वजनिक सुट्टी</td><td>फक्त अत्यावश्यक प्रकल्पासंबंधी बाबींसाठी</td></tr>
+        <tr><td class="k">कार्यालयीन वेळेनंतर</td><td>संदेश किंवा कॉलला पुढील कामकाजाच्या दिवशी उत्तर दिले जाऊ शकते</td></tr>
+        <tr><td class="k">WhatsApp चा वापर</td><td>दैनंदिन चर्चा, मंजुरी, लहान Revisions, स्पष्टीकरणे, Documents, Images, Videos व Confirmations</td></tr>
+        <tr><td class="k">WhatsApp ची वैधता</td><td>लेखी WhatsApp Communication हे <strong>Valid Project Communication</strong> मानले जाईल</td></tr>
+        <tr><td class="k">मंजुरीचे माध्यम</td><td>WhatsApp, Email किंवा कोणतेही लेखी Digital Communication - सर्व Valid</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ६ · अटी व शर्ती ══════════ -->
+<section class="sec" id="s6">
+  <div class="sec__band"><span class="sec__n">विभाग ६</span><h2 class="sec__t">अटी, शर्ती व सेवा हमी</h2></div>
+
+  <div class="th"><span class="th__n">६.१</span><h3 class="th__t">Revision Policy</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>घटक</th><th class="num">समाविष्ट Rounds</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Mobile Application (Android + iOS)</td><td class="num">3 Rounds</td></tr>
+        <tr><td class="k">Website</td><td class="num">3 Rounds</td></tr>
+        <tr class="total"><td>एकूण</td><td class="num">6 Rounds</td></tr>
+      </tbody>
+      <caption>App चे Rounds Website मध्ये वापरता येणार नाहीत व याउलटही - दोन्हींचे Rounds <strong>स्वतंत्रपणे</strong> मोजले जातील.</caption>
+    </table>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Revision मध्ये काय समाविष्ट</th><th>Revision मध्ये काय समाविष्ट नाही</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="chip chip--yes">समाविष्ट</span><br>
+            • मजकूरातील बदल<br>• रंगामधील बदल<br>
+            • Layout मधील लहान सुधारणा<br>• मंजूर Design मधील आवश्यक बदल
+          </td>
+          <td>
+            <span class="chip chip--no">समाविष्ट नाही</span><br>
+            • नवीन Feature · नवीन Module<br>• नवीन Screen · नवीन Workflow<br>
+            • संपूर्ण Design बदल<br>• मंजूर संकल्पनेमध्ये मोठा बदल
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">६.२</span><h3 class="th__t">Warranty व Bug निराकरण कालावधी</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>बाब</th><th>तपशील</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Bug Fix Warranty</td><td>अंतिम सुपुर्दगीनंतर <strong>90 दिवस</strong> - Scope मधील सुविधांशी संबंधित Technical Bugs विनामूल्य दुरुस्त</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="k">नवीन Features</td><td>Warranty अंतर्गत येत नाहीत</td><td class="c"><span class="chip chip--no">वगळले</span></td></tr>
+        <tr><td class="k">Design Changes</td><td>Warranty अंतर्गत येत नाहीत</td><td class="c"><span class="chip chip--no">वगळले</span></td></tr>
+        <tr><td class="k">Scope Changes</td><td>Warranty अंतर्गत येत नाहीत</td><td class="c"><span class="chip chip--no">वगळले</span></td></tr>
+        <tr><td class="k">Third-Party मधील बदल</td><td>Warranty लागू नाही</td><td class="c"><span class="chip chip--no">वगळले</span></td></tr>
+        <tr><td class="k">Client / इतरांकडून केलेले बदल</td><td>Warranty लागू नाही</td><td class="c"><span class="chip chip--no">वगळले</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>समस्येचे स्वरूप</th><th class="num">निराकरण कालावधी</th></tr></thead>
+      <tbody>
+        <tr><td>छोट्या / सर्वसाधारण त्रुटी (Minor Bugs)</td><td class="num">12 - 24 तास</td></tr>
+        <tr><td>मध्यम स्वरूपाच्या त्रुटी (Standard Bugs)</td><td class="num">24 - 48 तास</td></tr>
+        <tr><td>गुंतागुंतीच्या त्रुटी (Complex Bugs)</td><td class="num">48 - 72 तास</td></tr>
+        <tr><td>मोठ्या / Critical समस्या (Major Issues)</td><td class="num">72+ तास</td></tr>
+      </tbody>
+      <caption>कालावधी तक्रार प्राप्त झाल्यापासून मोजला जाईल. समस्येची गुंतागुंत, Server / Third-Party Downtime किंवा अतिरिक्त तपासणीच्या गरजेनुसार यात बदल होऊ शकतो.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">६.३</span><h3 class="th__t">Support, Maintenance व Update शुल्क</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>सेवा</th><th>कालावधी / व्याप्ती</th><th class="num">शुल्क</th></tr></thead>
+      <tbody>
+        <tr><td class="k">आरंभिक निःशुल्क Support</td><td><strong>90 दिवस</strong> Delivery पासून - Bug Fixes, तांत्रिक अडचणी, Server/App मार्गदर्शन, Admin Panel सहाय्य, किरकोळ सुधारणा</td><td class="num"><span class="chip chip--yes">विनामूल्य</span></td></tr>
+        <tr><td class="k">90 दिवसांनंतर Support</td><td>कोणतीही Support, Update किंवा Maintenance</td><td class="num"><span class="chip chip--no">सशुल्क</span></td></tr>
+        <tr><td class="k">वार्षिक देखभाल (AMC)</td><td>सामान्य Bug Fixes, Security Updates, नियमित तांत्रिक सहाय्य</td><td class="num">₹15,000 - ₹20,000<br><em>प्रति वर्ष</em></td></tr>
+        <tr><td class="k">छोटे Update</td><td>Text / Content बदल, छोटे UI बदल, Setting / Config बदल</td><td class="num">₹5,000 - ₹10,000</td></tr>
+        <tr><td class="k">मोठा बदल</td><td>नवीन AI Feature, नवीन Module, नवीन Workflow, गुंतागुंतीचे Integration</td><td class="num">₹15,000+</td></tr>
+      </tbody>
+      <caption>AMC ची अंतिम रक्कम आवश्यक सेवांच्या स्वरूपानुसार व प्रत्यक्ष कामाच्या व्याप्तीनुसार ठरेल. नवीन Features व मोठे बदल AMC मध्ये समाविष्ट नाहीत. प्रत्येक Update चे अंतिम शुल्क काम सुरू करण्यापूर्वी Client यांना कळविण्यात येईल.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">६.४</span><h3 class="th__t">Change Request प्रक्रिया</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>नियम</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>मंजूर Scope of Work बाहेरील कोणतेही काम <strong>Additional Work</strong> समजले जाईल.</td></tr>
+        <tr><td class="num">२</td><td>त्यासाठी स्वतंत्र <strong>Quotation</strong> देण्यात येईल.</td></tr>
+        <tr><td class="num">३</td><td>सुधारित <strong>Timeline</strong> निश्चित करण्यात येईल.</td></tr>
+        <tr><td class="num">४</td><td>Development सुरू करण्यापूर्वी Client यांची <strong>लेखी मंजुरी</strong> आवश्यक राहील.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">६.५</span><h3 class="th__t">डेटा प्रायव्हसी व सुरक्षा</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>हमी</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>User Data सुरक्षित ठेवण्यासाठी Industry-Standard Practices चा वाजवी वापर केला जाईल.</td></tr>
+        <tr><td class="num">२</td><td>संवेदनशील माहिती (Sensitive Information) सुरक्षितरित्या Store केली जाईल.</td></tr>
+        <tr><td class="num">३</td><td>संपूर्ण Development प्रक्रियेदरम्यान Privacy व Security यांचा विचार केला जाईल.</td></tr>
+        <tr><td class="num">४</td><td>जिथे लागू असेल तिथे योग्य Access Controls लागू करण्यात येतील.</td></tr>
+        <tr><td class="num">५</td><td>Passwords व गोपनीय Credentials अनधिकृत व्यक्तींसोबत Share केले जाणार नाहीत.</td></tr>
+        <tr><td class="num">६</td><td>Client ची Data पूर्णपणे Confidential मानली जाईल.</td></tr>
+        <tr><td class="num">७</td><td>Developer हेतुपुरस्सर Client ची माहिती उघड करणार नाहीत किंवा तिचा गैरवापर करणार नाहीत.</td></tr>
+      </tbody>
+      <caption><strong>मर्यादा -</strong> Software, Internet Services व Third-Party Providers यांच्यात अंतर्निहित (Inherent) जोखीम असल्याने, पूर्ण (Absolute) सुरक्षिततेची हमी देता येत नाही.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">६.६</span><h3 class="th__t">दायित्वाची मर्यादा (Limitation of Liability)</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>ज्या बाबींसाठी Developer जबाबदार राहणार नाहीत</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Google च्या Policy मधील बदल</td></tr>
+        <tr><td class="num">२</td><td>Apple च्या Policy मधील बदल</td></tr>
+        <tr><td class="num">३</td><td>Government Policy मधील बदल</td></tr>
+        <tr><td class="num">४</td><td>Third-Party Service मधील बदल</td></tr>
+        <tr><td class="num">५</td><td>API मधील बदल</td></tr>
+        <tr><td class="num">६</td><td>Internet Failures</td></tr>
+        <tr><td class="num">७</td><td>Hosting Failures</td></tr>
+        <tr><td class="num">८</td><td>Force Majeure - अनियंत्रित नैसर्गिक किंवा आपत्कालीन परिस्थिती</td></tr>
+        <tr><td class="num">९</td><td>Client कडून चुकीची पुरवलेली Data</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ ७ · स्वीकृती ══════════ -->
+<section class="sec" id="s7">
+  <div class="sec__band"><span class="sec__n">विभाग ७</span><h2 class="sec__t">करार स्वीकृती (Client Confirmation)</h2></div>
+  <p class="sec__lead">हा करार WhatsApp द्वारे Share करण्यात येणार असल्याने, यामध्ये स्वतंत्र Signature Page समाविष्ट केलेले नाही.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th>बाब</th><th>तपशील</th></tr></thead>
+      <tbody>
+        <tr><td class="k">स्वीकृतीची पद्धत</td><td>WhatsApp Message, Email किंवा कोणतेही लेखी Digital Communication</td></tr>
+        <tr><td class="k">मान्य शब्द</td><td>“Approved”, “Agreed”, “Yes”, “Proceed” किंवा तत्सम कोणतेही होकारार्थी उत्तर</td></tr>
+        <tr><td class="k">कायदेशीर वैधता</td><td>Digital Confirmation ला <strong>लेखी स्वीकृती इतकीच Validity</strong> असेल</td></tr>
+        <tr><td class="k">परिणाम</td><td>अशा Confirmation नंतर हा करार दोन्ही पक्षांसाठी <strong>अंतिम व बंधनकारक</strong> मानला जाईल</td></tr>
+        <tr><td class="k">प्रकल्प सुरुवात</td><td>Confirmation + 10% Advance Payment प्राप्त झाल्यानंतर काम सुरू</td></tr>
+        <tr><td class="k">बदल हवे असल्यास</td><td>Client यांनी सुचविलेले बदल परस्पर चर्चेनंतर करारात समाविष्ट करण्यात येतील</td></tr>
+      </tbody>
+      <caption>Client यांनी या दस्तऐवजातील सर्व अटी, प्रकल्पाची व्याप्ती, सुविधा, वेळापत्रक व देयक पद्धती यांचा आढावा घेऊनच Confirmation द्यावे.</caption>
+    </table>
+  </div>
+
+  <div class="note note--yes">
+    <span class="note__t">संमती कोठे द्यावी</span>
+    <p>संपूर्ण करार वाचून झाल्यानंतर, या दस्तऐवजाच्या <strong>अगदी शेवटी</strong> दिलेल्या चौकटीत नाव लिहून संमती द्यावी. वरील पट्टीतील <strong>“✓ संमती”</strong> हे बटण दाबूनही तेथे थेट जाता येईल.</p>
+  </div>
+</section>
+
+
+<!-- ══════════ A · HOSTING ══════════ -->
+<section class="sec sec--break" id="s8">
+  <div class="sec__band"><span class="sec__n">Annexure A</span><h2 class="sec__t">Hosting व इतर बाह्य खर्च (Client यांनी भरावयाचे)</h2></div>
+  <p class="sec__lead">खालील शुल्क हे Developer चे शुल्क <strong>नाहीत</strong>. ही प्रत्येक App व Website ला लागणारी सर्वसाधारण Third-Party Running Costs असून Client यांनी संबंधित कंपनीला थेट अदा करावयाची आहेत. ही रक्कम ₹5,90,000/- या Development Cost पेक्षा वेगळी व अतिरिक्त आहे. <strong>येथे नमूद केलेली सर्व रक्कम अंदाजित असून संबंधित कंपनीच्या त्या वेळच्या दरानुसार कमी-जास्त होऊ शकते.</strong></p>
+
+  <div class="note note--warn">
+    <span class="note__t">वाचण्यापूर्वी - तीन महत्त्वाच्या गोष्टी</span>
+    <p><strong>१.</strong> प्रत्येक सेवेसाठी फक्त <strong>एकाच शिफारस केलेल्या कंपनीचे</strong> नाव दिले आहे. प्रत्यक्षात एकाच कंपनीकडून Account घेतले जाईल - अनेक Providers कडून नाही.</p>
+    <p><strong>२.</strong> सर्व दर जाणीवपूर्वक <strong>कमाल (Maximum)</strong> धरले आहेत, जेणेकरून पुढे किंमतीबाबत वाद उद्भवणार नाही. प्रत्यक्ष खर्च यापेक्षा कमीच येण्याची शक्यता आहे.</p>
+    <p><strong>३.</strong> जवळपास सर्व सेवा <strong>वार्षिक Plan</strong> मध्ये एकाच वेळी भरता येतात - दरमहा वेगवेगळी Payments करण्याची गरज नाही.</p>
+    <p><strong>४.</strong> <strong>वरील सर्व रक्कम ही संबंधित कंपनीच्या त्या वेळच्या दरानुसार कमी-जास्त होऊ शकते.</strong> Google, Apple, Hostinger, Hetzner यांसारख्या कंपन्या त्यांचे दर वेळोवेळी बदलू शकतात. त्यामुळे प्रत्यक्ष खरेदीच्या वेळी संबंधित कंपनीच्या अधिकृत Website वरील दर हाच अंतिम मानला जाईल. या दरांवर Developer चे कोणतेही नियंत्रण नाही व Developer या दरांची हमी देत नाहीत.</p>
+  </div>
+
+  <div class="th"><span class="th__n">A.1</span><h3 class="th__t">संपूर्ण खर्चाचा एकत्रित तक्ता</h3></div>
+  <div class="tbl">
+    <table>
+      <thead>
+        <tr>
+          <th class="num">क्र</th><th>सेवा</th><th>कंपनी</th><th>शुल्काचे स्वरूप</th>
+          <th class="num">1,000 Customers<br>वार्षिक</th><th class="num">10,000 Customers<br>वार्षिक</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="sub"><td colspan="6">अनिवार्य खर्च - हे लागतीलच</td></tr>
+        <tr><td class="num">१</td><td>App Server Hosting</td><td>Hetzner</td><td><span class="chip chip--info">मासिक</span> वार्षिक Plan उपलब्ध</td><td class="num">₹16,800<br><em>₹1,400/महिना</em></td><td class="num">₹48,000<br><em>₹4,000/महिना</em></td></tr>
+        <tr><td class="num">२</td><td>Website Hosting</td><td>Hostinger</td><td><span class="chip chip--tent">वार्षिक</span></td><td class="num">₹5,400</td><td class="num">₹5,400</td></tr>
+        <tr><td class="num">३</td><td>Domain Name (.com)</td><td>Hostinger</td><td><span class="chip chip--tent">वार्षिक</span></td><td class="num">₹1,499</td><td class="num">₹1,499</td></tr>
+        <tr><td class="num">४</td><td>Apple Developer Account</td><td>Apple</td><td><span class="chip chip--tent">वार्षिक</span> - $99</td><td class="num">₹9,400</td><td class="num">₹9,400</td></tr>
+        <tr><td class="num">५</td><td>SMS / OTP (Login Codes)</td><td>MSG91</td><td><span class="chip chip--info">वापरानुसार</span> ₹0.25/SMS</td><td class="num">₹2,000</td><td class="num">₹20,000</td></tr>
+        <tr><td class="num">६</td><td>Email Service (Transactional)</td><td>AWS SES</td><td><span class="chip chip--info">वापरानुसार</span></td><td class="num">₹1,200</td><td class="num">₹6,000</td></tr>
+        <tr><td class="num">७</td><td>Google Maps API</td><td>Google</td><td><span class="chip chip--info">वापरानुसार</span> Free Limit नंतरच</td><td class="num">₹0<br><em>Free Limit मध्ये</em></td><td class="num">₹6,000</td></tr>
+        <tr><td class="num">८</td><td>SSL Certificate</td><td>Hostinger</td><td><span class="chip chip--yes">मोफत</span> Hosting मध्ये समाविष्ट</td><td class="num">₹0</td><td class="num">₹0</td></tr>
+        <tr><td class="num">९</td><td>CDN Service</td><td>Cloudflare</td><td><span class="chip chip--yes">मोफत</span> Free Plan पुरेसे</td><td class="num">₹0</td><td class="num">₹0</td></tr>
+        <tr class="total"><td class="num">-</td><td colspan="3">दरवर्षी सुरू राहणारा एकूण खर्च (Recurring)</td><td class="num">₹36,300</td><td class="num">₹96,300</td></tr>
+
+        <tr class="sub"><td colspan="6">एकवेळचा खर्च - फक्त पहिल्या वर्षी</td></tr>
+        <tr><td class="num">१०</td><td>Google Play Developer Account</td><td>Google</td><td><span class="chip chip--yes">एकवेळ</span> - $25 · पुन्हा भरावे लागत नाही</td><td class="num">₹2,400</td><td class="num">₹2,400</td></tr>
+        <tr class="total"><td class="num">-</td><td colspan="3">पहिल्या वर्षाचा एकूण खर्च</td><td class="num">₹38,700</td><td class="num">₹98,700</td></tr>
+
+        <tr class="sub"><td colspan="6">पर्यायी खर्च - गरज असेल तरच</td></tr>
+        <tr><td class="num">११</td><td>WhatsApp Business API</td><td>Interakt</td><td><span class="chip chip--info">वापरानुसार</span> ≈ ₹0.90/Conversation</td><td class="num">₹5,000</td><td class="num">₹25,000</td></tr>
+        <tr><td class="num">१२</td><td>Payment Gateway Charges</td><td>Razorpay</td><td><span class="chip chip--info">व्यवहारानुसार</span> आगाऊ शुल्क नाही</td><td class="num" colspan="2">≈ 2% प्रति Transaction</td></tr>
+        <tr><td class="num">१३</td><td>AI API (भविष्यात AI Features घेतल्यास)</td><td>OpenAI</td><td><span class="chip chip--no">सध्या लागू नाही</span></td><td class="num" colspan="2">स्वतंत्र Quotation</td></tr>
+      </tbody>
+      <caption>
+        <strong>सोप्या भाषेत -</strong> 1,000 Customers साठी पहिल्या वर्षी अंदाजे <strong>₹38,700</strong> (म्हणजे सुमारे <strong>₹3,300 प्रति महिना</strong>), दुसऱ्या वर्षापासून <strong>₹36,300 प्रति वर्ष</strong>. Customers वाढल्यास मुख्यतः फक्त Server व SMS चा खर्च वाढतो - बाकीचे जवळपास तेवढेच राहतात.<br>
+        <strong>टीप:</strong> वरील सर्व रक्कम अंदाजित असून संबंधित कंपनीच्या त्या वेळच्या दरानुसार <strong>कमी-जास्त होऊ शकते</strong>.
+      </caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">A.2</span><h3 class="th__t">Server खर्च - Customers वाढल्यावर (संदर्भासाठी)</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Active Users</th><th>काय लागेल</th><th>कंपनी</th><th class="num">कमाल / महिना</th><th class="num">कमाल / वर्ष</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Testing (0)</td><td>फक्त Build व Demo साठी Free Server</td><td>Render (Free)</td><td class="num">₹0</td><td class="num">₹0</td></tr>
+        <tr><td class="k">2,000 पर्यंत</td><td>छोटा Always-On Server + Database</td><td>Hetzner</td><td class="num">₹1,400</td><td class="num">₹16,800</td></tr>
+        <tr><td class="k">2,000 - 10,000</td><td>जास्त क्षमतेचा Server + वेगासाठी Cache</td><td>Hetzner</td><td class="num">₹4,000</td><td class="num">₹48,000</td></tr>
+        <tr><td class="k">10,000 - 30,000</td><td>Production Server + Managed DB + Daily Backups</td><td>DigitalOcean</td><td class="num">₹8,500</td><td class="num">₹1,02,000</td></tr>
+        <tr><td class="k">30,000 - 1,00,000</td><td>मोठा Production Server + Load Balancing</td><td>DigitalOcean</td><td class="num">₹18,000</td><td class="num">₹2,16,000</td></tr>
+        <tr><td class="k">1,00,000+</td><td>अवाढव्य Load साठी Auto-Scaling Cloud</td><td>AWS</td><td class="num">₹35,000+</td><td class="num">₹4,20,000+</td></tr>
+      </tbody>
+      <caption>ही रक्कम त्या-त्या टप्प्यासाठीची कमाल किंमत आहे - <strong>सर्व टप्प्यांची बेरीज नाही</strong>. Users वाढतील तेव्हाच पुढील Tier घ्यावा लागेल.</caption>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">A.3</span><h3 class="th__t">कोणता खर्च कधी लागतो</h3></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>सेवा</th><th>कधी आवश्यक</th></tr></thead>
+      <tbody>
+        <tr><td class="k">Google Play Account</td><td>Android App Publish करण्यापूर्वी</td></tr>
+        <tr><td class="k">Apple Developer Account</td><td>iOS App Publish करण्यापूर्वी</td></tr>
+        <tr><td class="k">App Server Hosting</td><td>App सार्वजनिक वापरासाठी Live होण्यापूर्वी</td></tr>
+        <tr><td class="k">Domain Name</td><td>Website Deployment पूर्वी</td></tr>
+        <tr><td class="k">Website Hosting</td><td>Website Live होण्यापूर्वी</td></tr>
+        <tr><td class="k">SMS / OTP</td><td>Live Users साठी OTP Verification सुरू केल्यावर</td></tr>
+        <tr><td class="k">Email Service</td><td>Production मधील Emails व Notifications साठी</td></tr>
+        <tr><td class="k">Google Maps API</td><td>Free Quota संपल्यानंतर किंवा Billing आवश्यक असल्यास</td></tr>
+        <tr><td class="k">Payment Gateway</td><td>Online Payment सुविधा सुरू केल्यावरच</td></tr>
+        <tr><td class="k">AI API</td><td>भविष्यात AI Features जोडल्यासच</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note note--warn">
+    <span class="note__t">चलन दर (Exchange Rate) बाबत</span>
+    <p>Google व Apple त्यांचे शुल्क मूळतः <strong>US Dollar</strong> मध्ये आकारतात - $25 (Google Play, एकवेळ) व $99 (Apple, दरवर्षी). वर दिलेली रुपयातील रक्कम 02/08/2026 च्या अंदाजित दरानुसार आहे. प्रत्यक्ष Payment च्या दिवशीच्या $ ते ₹ दरानुसार अंतिम रक्कम कमी-जास्त होऊ शकते - यावर Developer चे नियंत्रण नाही.</p>
+    <p><strong>Account मालकी -</strong> Developer हे दोन्ही Accounts Client यांच्यासाठी तयार करून Manage करतील; Account मात्र <strong>Client यांच्याच नावावर</strong> राहील व दोन्ही Apps चे संपूर्ण मालकी हक्क Client यांच्याकडेच राहतील. फक्त Android App हवा असल्यास Apple चा ₹9,400/वर्ष खर्च वगळता येईल.</p>
+  </div>
+</section>
+
+<!-- ══════════ B · किंमत विभागणी ══════════ -->
+<section class="sec" id="s9">
+  <div class="sec__band"><span class="sec__n">Annexure B</span><h2 class="sec__t">Feature-निहाय किंमत विभागणी (संदर्भासाठी)</h2></div>
+  <p class="sec__lead">₹5,90,000/- ही रक्कम संपूर्ण प्रकल्पासाठी एकत्रित (Lump-Sum) निश्चित आहे. खालील विभागणी केवळ Client यांच्या समजुतीसाठी दिली आहे आणि ती कोणत्याही एका Feature साठी स्वतंत्र Refund, Renegotiation किंवा Partial Cancellation चा आधार असणार नाही.</p>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>Feature / Module</th><th class="num">अंदाजित किंमत</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td>Requirement Analysis &amp; Project Planning</td><td class="num">₹15,000</td></tr>
+        <tr><td class="num">२</td><td>UI / UX Design (App + Website + Admin + Dashboard)</td><td class="num">₹40,000</td></tr>
+        <tr><td class="num">३</td><td>Rust Backend Development (API, Database Architecture, Server Logic)</td><td class="num">₹1,25,000</td></tr>
+        <tr><td class="num">४</td><td>Android Application Development</td><td class="num">₹1,05,000</td></tr>
+        <tr><td class="num">५</td><td>iOS Application Development</td><td class="num">₹95,000</td></tr>
+        <tr><td class="num">६</td><td>Admin Panel Development</td><td class="num">₹40,000</td></tr>
+        <tr><td class="num">७</td><td>Business Dashboard Development</td><td class="num">₹30,000</td></tr>
+        <tr><td class="num">८</td><td>Website Development</td><td class="num">₹35,000</td></tr>
+        <tr><td class="num">९</td><td>Business Directory, Categories व Information Sections</td><td class="num">₹18,000</td></tr>
+        <tr><td class="num">१०</td><td>Voice Search - Mic (Type 1, Keyword Based)</td><td class="num">₹10,000</td></tr>
+        <tr><td class="num">११</td><td>Payment Gateway, Subscription व Notifications Integration<br><em>Gateway Integration, Subscription Logic, Transaction Handling, Failure/Refund Cases, Security व Testing - तांत्रिकदृष्ट्या सर्वाधिक गुंतागुंतीचा भाग</em></td><td class="num">₹30,000</td></tr>
+        <tr><td class="num">१२</td><td>Connectivity Integration (Maps, WhatsApp, Calling, Instagram, QR)</td><td class="num">₹12,000</td></tr>
+        <tr><td class="num">१३</td><td>Testing &amp; Quality Assurance</td><td class="num">₹20,000</td></tr>
+        <tr><td class="num">१४</td><td>Deployment, Play Store व App Store Publishing Assistance</td><td class="num">₹15,000</td></tr>
+        <tr><td class="num">१५</td><td>Professional Logo Design</td><td class="num">₹0<br><em>Complimentary</em></td></tr>
+        <tr class="total"><td class="num">-</td><td>एकूण प्रकल्प किंमत</td><td class="num">₹5,90,000</td></tr>
+      </tbody>
+      <caption>यामध्ये Type 2 AI Voice Search, AI Recommendations, Marketplace व इतर Optional / Future Features (विभाग २ मध्ये नमूद) यांचा समावेश नाही - त्या स्वतंत्रपणे Quote केल्या जातील.</caption>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════ अंतिम · संमती ══════════ -->
+<section class="sec" id="s10">
+  <div class="sec__band"><span class="sec__n">अंतिम</span><h2 class="sec__t">करार स्वीकृती (Digital Acceptance)</h2></div>
+  <p class="sec__lead">संपूर्ण करार - प्रकल्पाची व्याप्ती, किंमत, वेळापत्रक, सर्व अटी व दोन्ही परिशिष्टे - वाचल्यानंतर खाली आपली संमती नोंदवावी.</p>
+
+  <div class="accept" id="accept">
+
+    <div class="accept__live" id="acLive">
+      <h4 class="accept__h">करारास संमती द्या</h4>
+      <p class="accept__lead">खालील तीन पायऱ्या पूर्ण करा - नाव लिहा, दिनांक तपासा आणि संमतीची हिरवी चौकट Tick करा. Tick केल्याबरोबर संमती नोंदवली जाईल.</p>
+
+      <div class="accept__grid">
+        <label class="accept__field">
+          <span>१ · Client चे पूर्ण नाव</span>
+          <input type="text" id="acName" autocomplete="name" placeholder="उदा. Pritam Jadhav">
+        </label>
+        <label class="accept__field">
+          <span>२ · दिनांक</span>
+          <input type="date" id="acDate">
+        </label>
+      </div>
+
+      <p class="accept__step">३ · संमतीची चौकट Tick करा</p>
+      <label class="accept__check" for="acTick">
+        <input type="checkbox" id="acTick">
+        <span class="accept__box" aria-hidden="true"></span>
+        <span class="accept__txt">मी हा संपूर्ण करार वाचला असून त्यातील प्रकल्पाची व्याप्ती, एकूण किंमत <strong>₹5,90,000/-</strong>, देयक टप्पे, वेळापत्रक व सर्व अटी मला <strong>मान्य</strong> आहेत. प्रकल्प सुरू करण्यास माझी संमती आहे.</span>
+      </label>
+
+      <p class="accept__hint" id="acHint">⚠ Tick केल्याबरोबर संमती <strong>कायमची</strong> नोंदवली जाईल व ती नंतर काढून टाकता येणार नाही.</p>
+    </div>
+
+    <div class="accept__done" id="acDone" hidden>
+      <div class="accept__stamp">
+        <span class="accept__tickmark">✓</span>
+        <div class="accept__stampin">
+          <strong id="acStampName"></strong>
+          <span id="acStampMeta"></span>
+        </div>
+        <span class="accept__lockbadge">🔒 Locked</span>
+      </div>
+      <p class="accept__locked">ही संमती आता <strong>निश्चित (Locked)</strong> झाली असून ती बदलता किंवा काढून टाकता येणार नाही.</p>
+
+      <div class="accept__next screen-only">
+        <span class="accept__nextt">पुढील पायरी - Advance Payment</span>
+        <p>संमती नोंदवल्याबद्दल धन्यवाद. प्रकल्प सुरू करण्यासाठी आता <strong>10% Advance Payment - ₹59,000</strong> चे देयक (Invoice) उघडा.</p>
+        <a class="btn btn--invoice" id="acInvoice" href="invoice.html" target="_blank" rel="noopener">📄 Advance Payment Invoice उघडा - ₹59,000</a>
+      </div>
+
+      <div class="accept__actions screen-only">
+        <button class="btn btn--primary" id="acPdf" type="button">⭳ PDF Save करा व पाठवा</button>
+        <button class="btn" id="acSend" type="button">WhatsApp वर कळवा (ऐच्छिक)</button>
+        <span class="accept__msg" id="acMsg" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <p class="accept__fine">ही नोंद Client यांच्या स्वतःच्या Browser मध्ये जतन केली जाते. Developer यांना ती दिसण्यासाठी Client यांनी हे पान <strong>PDF म्हणून Save करून</strong> किंवा <strong>Screenshot काढून</strong> पाठवावे. विभाग ७ नुसार WhatsApp, Email किंवा कोणतेही लेखी Digital Communication हे वैध स्वीकृती मानले जाईल.</p>
+  </div>
+</section>
+
+</div><!-- /#doc -->
+
+<footer class="foot">
+  <div class="foot__block">
+    <svg class="foot__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN"><use href="#midsun-logo"/></svg>
+    <strong>Ghorpadepatil &amp; Team</strong>
+    Email · <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+    Email · <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+    Primary · WhatsApp · <a href="tel:9404423429">9404423429</a><br>
+    Call / WhatsApp · <a href="tel:9684008406">9684008406</a>
+  </div>
+  <div class="foot__block">
+    <strong>Sangamner 360</strong>
+    Prepared for Mr. Pritam Jadhav<br>
+    करार (Contract) · 02 / 08 / 2026
+  </div>
+  <div class="foot__seal">Client Confirmation Pending</div>
+</footer>
+
+<p class="print-only" style="margin-top:1.25rem; font-size:8pt; color:#6B7280; text-align:center; border-top:1px solid #C9CEDD; padding-top:.5rem">
+  हा दस्तऐवज Ghorpadepatil &amp; Team तर्फे Mr. Pritam Jadhav यांच्यासाठी तयार करण्यात आला आहे. · kgpatilmail@gmail.com · midsungroupmail@gmail.com · 9404423429 (Primary · WhatsApp) · 9684008406 (Call / WhatsApp)
+</p>
+
+</main>
+
+<script>
+(function(){
+  var root = document.documentElement;
+
+  document.getElementById('pdfBtn').addEventListener('click', function(){ window.print(); });
+
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme') === 'dark'
+      || (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  });
+
+  /* ── live search across every table row ── */
+  var q = document.getElementById('q');
+  var empty = document.getElementById('empty');
+  var secs = Array.prototype.slice.call(document.querySelectorAll('.sec'));
+
+  q.addEventListener('input', function(){
+    var term = this.value.trim().toLowerCase();
+    var anyHit = false;
+
+    secs.forEach(function(sec){
+      var rows = sec.querySelectorAll('tbody tr');
+      var hits = 0;
+
+      rows.forEach(function(tr){
+        if(tr.classList.contains('sub') || tr.classList.contains('total')){
+          tr.classList.toggle('no-hit', !!term);
+          return;
+        }
+        var match = !term || tr.textContent.toLowerCase().indexOf(term) !== -1;
+        tr.classList.toggle('no-hit', !match);
+        if(match) hits++;
+      });
+
+      var secMatch = !term
+        || hits > 0
+        || sec.querySelector('.sec__t').textContent.toLowerCase().indexOf(term) !== -1;
+
+      sec.classList.toggle('no-hit', !secMatch);
+      if(secMatch) anyHit = true;
+
+      /* hide prose blocks while filtering so results stay tight */
+      sec.querySelectorAll('.sec__lead, .note, .th__note').forEach(function(el){
+        el.classList.toggle('no-hit', !!term);
+      });
+      /* hide table blocks that ended up with zero visible rows */
+      sec.querySelectorAll('.tbl').forEach(function(box){
+        if(!term){ box.classList.remove('no-hit'); return; }
+        var visible = box.querySelectorAll('tbody tr:not(.no-hit)').length;
+        box.classList.toggle('no-hit', visible === 0);
+      });
+      sec.querySelectorAll('.th').forEach(function(h){
+        var box = h.nextElementSibling;
+        while(box && !box.classList.contains('tbl')) box = box.nextElementSibling;
+        h.classList.toggle('no-hit', !!term && (!box || box.classList.contains('no-hit')));
+      });
+    });
+
+    empty.classList.toggle('show', !anyHit);
+  });
+
+  /* ══ करार स्वीकृती (Digital Acceptance) ══
+     ↓↓ Developer चा WhatsApp क्रमांक येथे बदला (देश कोडसह, + किंवा space नाही) ↓↓ */
+  var DEV_WA = "919404423429";
+
+  var box    = document.getElementById('accept');
+  var acLive = document.getElementById('acLive');
+  var acDone = document.getElementById('acDone');
+  var acName = document.getElementById('acName');
+  var acDate = document.getElementById('acDate');
+  var acTick = document.getElementById('acTick');
+  var acHint = document.getElementById('acHint');
+  var acSend = document.getElementById('acSend');
+  var acPdf  = document.getElementById('acPdf');
+  var acMsg  = document.getElementById('acMsg');
+  var STORE  = 'sbl-accept-locked-v1';
+
+  function today(){
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0')
+           + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function pretty(iso){
+    if(!iso) return '';
+    var p = iso.split('-');
+    return p[2] + ' / ' + p[1] + ' / ' + p[0];
+  }
+  function confirmText(n, d){
+    return 'Approved.\n\n'
+      + 'मी, ' + n + ', Sangamner 360 या प्रकल्पाचा करार '
+      + 'संपूर्ण वाचला असून त्यातील प्रकल्पाची व्याप्ती, एकूण किंमत '
+      + '₹5,90,000/-, देयक टप्पे, वेळापत्रक व सर्व अटी मला मान्य आहेत. '
+      + 'प्रकल्प सुरू करण्यास माझी संमती आहे.\n\n'
+      + 'दिनांक: ' + pretty(d) + '\nClient: ' + n;
+  }
+
+  /* लॉक झालेली संमती दाखवा - ही स्थिती बदलता येत नाही */
+  function showLocked(n, d, stamped){
+    box.classList.add('is-locked');
+    acLive.hidden = true;
+    acDone.hidden = false;
+    document.getElementById('acStampName').textContent = n + ' - संमती नोंदवली';
+    document.getElementById('acStampMeta').textContent =
+      'दिनांक ' + pretty(d) + ' · वेळ ' + stamped
+      + ' · Sangamner 360 · करार';
+    acSend.onclick = function(){
+      window.open('https://wa.me/' + DEV_WA + '?text=' + encodeURIComponent(confirmText(n, d)), '_blank');
+      acMsg.textContent = 'WhatsApp उघडले - संदेश पाठवा.';
+    };
+  }
+
+  acDate.value = today();
+
+  /* ── Developer testing escape hatch ──────────────────────────────
+     फाईल उघडताना पत्त्याच्या शेवटी ?reset लावल्यास नोंदवलेली संमती
+     पुसली जाते व चौकट पुन्हा कोरी होते. Client ला हे दिसत नाही.
+     उदा.  ...App_Development_Agreement_Sangamner.html?reset
+     ───────────────────────────────────────────────────────────── */
+  if(location.search.indexOf('reset') !== -1 || location.hash.indexOf('reset') !== -1){
+    try{ localStorage.removeItem(STORE); }catch(e){}
+  }
+
+  /* लपलेला Reset - वरील पट्टीतील MID-SUN logo वर सलग ५ वेळा Click करा.
+     Client ला हे माहीत नसल्याने चुकून होणार नाही. */
+  (function(){
+    var barLogo = document.querySelector('.bar__logo');
+    if(!barLogo) return;
+    var hits = 0, timer = null;
+    barLogo.style.cursor = 'pointer';
+    barLogo.addEventListener('click', function(){
+      hits++;
+      clearTimeout(timer);
+      timer = setTimeout(function(){ hits = 0; }, 1500);
+      if(hits < 5) return;
+      hits = 0;
+      if(window.confirm('Developer Reset\n\nनोंदवलेली संमती पुसून टाकायची आहे का?\n(फक्त चाचणीसाठी वापरा)')){
+        try{ localStorage.removeItem(STORE); }catch(e){}
+        location.reload();
+      }
+    });
+  })();
+
+  /* Console मधून Reset करण्यासाठी:  resetTick()  */
+  window.resetTick = function(){
+    try{ localStorage.removeItem(STORE); }catch(e){}
+    location.reload();
+  };
+
+  var saved = null;
+  try{ saved = JSON.parse(localStorage.getItem(STORE) || 'null'); }catch(e){}
+
+  if(saved && saved.locked){
+    /* आधीच नोंदवलेली संमती - थेट Locked स्थिती दाखवा */
+    showLocked(saved.n, saved.d, saved.at);
+  } else {
+    /* Tick करताच संमती कायमची नोंदवली जाते */
+    acTick.addEventListener('change', function(){
+      if(!acTick.checked) return;
+
+      var n = acName.value.trim(), d = acDate.value;
+
+      if(n.length < 2){
+        acTick.checked = false;
+        acHint.innerHTML = '⚠ कृपया प्रथम आपले <strong>पूर्ण नाव</strong> लिहा, नंतर चौकट Tick करा.';
+        acName.focus();
+        return;
+      }
+      if(!d){
+        acTick.checked = false;
+        acHint.innerHTML = '⚠ कृपया <strong>दिनांक</strong> निवडा.';
+        acDate.focus();
+        return;
+      }
+
+      var ok = window.confirm(
+        'संमती नोंदवायची आहे का?\n\n'
+        + 'नाव: ' + n + '\n'
+        + 'दिनांक: ' + pretty(d) + '\n\n'
+        + 'एकदा नोंदवल्यानंतर ही संमती बदलता किंवा काढून टाकता येणार नाही.'
+      );
+
+      if(!ok){ acTick.checked = false; return; }
+
+      var at = new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+      try{ localStorage.setItem(STORE, JSON.stringify({n:n, d:d, at:at, locked:true})); }catch(e){}
+      showLocked(n, d, at);
+    });
+  }
+
+  acPdf.addEventListener('click', function(){ window.print(); });
+
+  /* ── scroll-spy on the nav buttons ── */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));
+  var byId = {};
+  links.forEach(function(a){ byId[a.getAttribute('href').slice(1)] = a; });
+
+  if('IntersectionObserver' in window){
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){ a.classList.remove('is-active'); });
+        var a = byId[e.target.id];
+        if(a){
+          a.classList.add('is-active');
+          a.scrollIntoView({block:'nearest', inline:'nearest'});
+        }
+      });
+    }, {rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(s){ obs.observe(s); });
+  }
+})();
+</script>
+
+</body>
+</html>

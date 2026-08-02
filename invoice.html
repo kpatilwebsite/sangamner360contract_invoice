@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="mr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Invoice - Advance Payment - Sangamner 360</title>
+<style>
+/* ═══════════ TOKENS ═══════════ */
+:root{
+  --ink:#16213A; --ink-soft:#3A4560; --muted:#6B7189; --faint:#8D93A8;
+  --paper:#F6F7FB; --surface:#FFFFFF; --band:#F1F3F9;
+  --line:#DFE3EE; --line-strong:#C3C9DC;
+  --indigo:#2B3F80; --indigo-soft:#EDF0F9;
+  --bronze:#9A6A1F; --bronze-soft:#FBF3E3;
+  --sage:#2F6B4F; --sage-soft:#E9F3ED;
+  --rust:#A33A2A; --rust-soft:#FBEDEA;
+  --serif: Georgia,"Nirmala UI","Noto Serif Devanagari","Times New Roman",serif;
+  --sans: "Nirmala UI","Noto Sans Devanagari","Segoe UI",-apple-system,system-ui,sans-serif;
+  --mono: ui-monospace,"Cascadia Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#E4E7F0; --ink-soft:#C2C8DA; --muted:#959CB4; --faint:#7A8199;
+    --paper:#0B0F1B; --surface:#151B2C; --band:#1C2337;
+    --line:#2A3149; --line-strong:#3A4363;
+    --indigo:#8FA5E8; --indigo-soft:#1C2440;
+    --bronze:#D9A855; --bronze-soft:#2C2313;
+    --sage:#6FBE92; --sage-soft:#16281F;
+    --rust:#E38878; --rust-soft:#2B1815;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#E4E7F0; --ink-soft:#C2C8DA; --muted:#959CB4; --faint:#7A8199;
+  --paper:#0B0F1B; --surface:#151B2C; --band:#1C2337;
+  --line:#2A3149; --line-strong:#3A4363;
+  --indigo:#8FA5E8; --indigo-soft:#1C2440;
+  --bronze:#D9A855; --bronze-soft:#2C2313;
+  --sage:#6FBE92; --sage-soft:#16281F;
+  --rust:#E38878; --rust-soft:#2B1815;
+}
+:root[data-theme="light"]{
+  --ink:#16213A; --ink-soft:#3A4560; --muted:#6B7189; --faint:#8D93A8;
+  --paper:#F6F7FB; --surface:#FFFFFF; --band:#F1F3F9;
+  --line:#DFE3EE; --line-strong:#C3C9DC;
+  --indigo:#2B3F80; --indigo-soft:#EDF0F9;
+  --bronze:#9A6A1F; --bronze-soft:#FBF3E3;
+  --sage:#2F6B4F; --sage-soft:#E9F3ED;
+  --rust:#A33A2A; --rust-soft:#FBEDEA;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:15px; line-height:1.6; font-variant-numeric:tabular-nums}
+
+/* ═══════════ BAR ═══════════ */
+.bar{position:sticky; top:0; z-index:50; background:var(--surface);
+  border-bottom:1px solid var(--line); box-shadow:0 1px 3px rgba(20,30,60,.04)}
+.bar__in{display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  padding:.6rem clamp(.75rem,3vw,2rem); max-width:56rem; margin:0 auto}
+.bar__logo{width:2.7rem; height:2.7rem; flex-shrink:0}
+.bar__id{font-family:var(--serif); font-size:.92rem; font-weight:700; color:var(--indigo); line-height:1.25}
+.bar__id span{display:block; font-family:var(--sans); font-size:.65rem; font-weight:600;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--faint)}
+.btn{font-family:var(--sans); font-size:.82rem; font-weight:600; padding:.5rem .9rem;
+  border-radius:3px; cursor:pointer; border:1px solid var(--line-strong);
+  background:var(--surface); color:var(--ink); white-space:nowrap; transition:background .15s,border-color .15s}
+.btn:hover{background:var(--band); border-color:var(--indigo)}
+.btn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px}
+.btn--primary{background:var(--indigo); border-color:var(--indigo); color:#fff}
+.btn--primary:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+.bar__sp{margin-left:auto}
+
+/* ═══════════ SHEET ═══════════ */
+.sheet{max-width:min(52rem,100% - 1.5rem); margin:1.75rem auto 4rem;
+  background:var(--surface); border:1px solid var(--line); border-radius:3px;
+  padding:clamp(1.25rem,4vw,3rem)}
+
+/* ═══════════ LETTERHEAD ═══════════ */
+.letterhead{display:flex; align-items:center; justify-content:space-between;
+  gap:1rem 2rem; flex-wrap:wrap; padding-bottom:1.25rem; margin-bottom:1.75rem;
+  border-bottom:2px solid var(--line-strong)}
+.letterhead__logo{width:7.4rem; height:7.4rem; flex-shrink:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.letterhead__org{text-align:right; margin-left:auto}
+.letterhead__name{font-family:var(--serif); font-size:1.08rem; font-weight:700;
+  color:var(--ink); margin:0 0 .2rem}
+.letterhead__meta{margin:0; font-size:.83rem; line-height:1.6; color:var(--muted)}
+.letterhead__meta a{color:var(--indigo); text-decoration:none}
+@media (max-width:520px){.letterhead{justify-content:center}.letterhead__org{text-align:center;margin-left:0}}
+
+/* ═══════════ INVOICE HEAD ═══════════ */
+.invhead{display:flex; justify-content:space-between; align-items:flex-start;
+  gap:1.5rem; flex-wrap:wrap; margin-bottom:1.75rem}
+.invhead__t{font-family:var(--serif); font-size:clamp(1.6rem,4vw,2.2rem);
+  font-weight:700; margin:0 0 .2rem; letter-spacing:.02em}
+.invhead__s{font-size:.8rem; font-weight:700; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--bronze); margin:0}
+.invmeta{border:1px solid var(--line); border-radius:3px; overflow:hidden; min-width:16rem}
+.invmeta__row{display:flex; border-bottom:1px solid var(--line)}
+.invmeta__row:last-child{border-bottom:0}
+.invmeta__k{background:var(--band); padding:.45rem .7rem; font-size:.73rem; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--muted); flex:0 0 9rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.invmeta__v{padding:.45rem .7rem; font-size:.88rem; font-weight:600; color:var(--ink); flex:1}
+
+/* ═══════════ PARTIES ═══════════ */
+.parties{display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:0; border:1px solid var(--line); border-radius:3px; overflow:hidden; margin-bottom:1.75rem}
+.parties__c{padding:.9rem 1.1rem; border-right:1px solid var(--line)}
+.parties__c:last-child{border-right:0}
+.parties__k{display:block; font-size:.68rem; font-weight:700; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--faint); margin-bottom:.35rem}
+.parties__n{font-family:var(--serif); font-size:1.02rem; font-weight:700; color:var(--ink);
+  margin:0 0 .15rem}
+.parties__d{font-size:.85rem; color:var(--muted); line-height:1.6; margin:0}
+.parties__d a{color:var(--indigo); text-decoration:none}
+
+/* ═══════════ TABLES ═══════════ */
+.tbl{overflow-x:auto; margin:0 0 1.25rem; border:1px solid var(--line); border-radius:3px}
+table{border-collapse:collapse; width:100%; font-size:.88rem; min-width:24rem}
+thead th{background:var(--band); text-align:left; font-weight:700; color:var(--ink);
+  padding:.6rem .8rem; border-bottom:2px solid var(--line-strong);
+  font-size:.72rem; letter-spacing:.06em; text-transform:uppercase;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+tbody td{padding:.7rem .8rem; border-bottom:1px solid var(--line);
+  color:var(--ink-soft); vertical-align:top; line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right; white-space:nowrap}
+td.num{font-weight:600; color:var(--ink)}
+td.k{font-weight:600; color:var(--ink)}
+tr.total td{background:var(--bronze-soft); font-weight:700; color:var(--ink);
+  border-top:2px solid var(--bronze); border-bottom:0; font-size:1rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+tr.step1 td{background:var(--sage-soft); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--muted);
+  padding:.55rem .8rem; line-height:1.55; background:var(--band);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+/* ═══════════ DUE BOX ═══════════ */
+.due{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+  gap:1rem; padding:1.15rem 1.35rem; margin-bottom:1.75rem;
+  background:var(--bronze-soft); border:2px solid var(--bronze); border-radius:4px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.due__l{font-size:.73rem; font-weight:700; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--bronze); margin:0 0 .2rem}
+.due__w{font-size:.85rem; color:var(--ink-soft); margin:0}
+.due__a{font-family:var(--serif); font-size:clamp(1.7rem,5vw,2.4rem); font-weight:700;
+  color:var(--ink); line-height:1; letter-spacing:-.01em}
+
+/* ═══════════ SECTION HEADS ═══════════ */
+.sh{display:flex; align-items:baseline; gap:.7rem; margin:2rem 0 .8rem}
+.sh__n{font-family:var(--serif); font-size:.75rem; font-weight:700; color:#fff;
+  background:var(--indigo); padding:.15rem .5rem; border-radius:2px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.sh__t{font-family:var(--serif); font-size:1.08rem; font-weight:700; color:var(--ink); margin:0}
+
+/* ═══════════ PAYMENT METHODS ═══════════ */
+.pays{display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem}
+.pay{border:1px solid var(--line-strong); border-radius:4px; padding:1.1rem 1.15rem;
+  background:var(--surface)}
+.pay--crypto{border-color:var(--bronze); background:var(--bronze-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.pay__h{display:flex; align-items:center; gap:.5rem; margin:0 0 .8rem; flex-wrap:wrap}
+.pay__t{font-family:var(--serif); font-size:1rem; font-weight:700; color:var(--ink); margin:0}
+.pay__tag{font-size:.63rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  padding:.12rem .45rem; border-radius:2px; background:var(--indigo-soft);
+  color:var(--indigo); border:1px solid var(--indigo);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.pay--crypto .pay__tag{background:var(--surface); color:var(--bronze); border-color:var(--bronze)}
+.pay__rows{width:100%; font-size:.85rem; border-collapse:collapse; min-width:0}
+.pay__rows td{padding:.3rem 0; border:0; vertical-align:top; line-height:1.5}
+.pay__rows td:first-child{color:var(--muted); white-space:nowrap; padding-right:.8rem; width:1%}
+.pay__rows td:last-child{color:var(--ink); font-weight:600; word-break:break-word}
+.pay__msg{font-size:.85rem; color:var(--ink-soft); margin:0 0 .5rem; line-height:1.6}
+.fill{display:inline-block; min-width:7rem; border-bottom:1.5px dotted var(--rust);
+  color:var(--rust); font-weight:600}
+
+/* QR - फक्त Image जोडल्यावरच दिसेल */
+.qrwrap{margin-top:1rem; display:flex; justify-content:center}
+.qrimg{max-width:16rem; width:100%; height:auto; display:block;
+  border:2px solid var(--line-strong); border-radius:6px; background:#fff; padding:.6rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+/* ── Copyable UPI ID ── */
+.copyrow{display:flex; align-items:center; gap:.7rem; flex-wrap:wrap;
+  margin-top:.85rem; padding:.7rem .85rem; border:2px solid var(--indigo);
+  border-radius:4px; background:var(--indigo-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.copyrow__in{flex:1; min-width:9rem}
+.copyrow__k{display:block; font-size:.66rem; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--indigo); margin-bottom:.15rem}
+.copyrow__v{font-family:var(--mono); font-size:1.02rem; font-weight:700; color:var(--ink);
+  word-break:break-all; user-select:all}
+.copybtn{font-family:var(--sans); font-size:.78rem; font-weight:700; cursor:pointer;
+  padding:.45rem .85rem; border-radius:3px; border:1px solid var(--indigo);
+  background:var(--indigo); color:#fff; white-space:nowrap; transition:background .15s}
+.copybtn:hover{background:var(--ink); border-color:var(--ink)}
+.copybtn:focus-visible{outline:2px solid var(--indigo); outline-offset:2px}
+.copybtn.is-done{background:var(--sage); border-color:var(--sage)}
+
+/* ═══════════ NOTE ═══════════ */
+.note{border-left:3px solid var(--indigo); background:var(--indigo-soft);
+  padding:.85rem 1.1rem; margin:1rem 0; border-radius:0 3px 3px 0; font-size:.86rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.note--warn{border-left-color:var(--bronze); background:var(--bronze-soft)}
+.note--yes{border-left-color:var(--sage); background:var(--sage-soft)}
+.note__t{display:block; font-size:.7rem; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; margin-bottom:.4rem; color:var(--indigo)}
+.note--warn .note__t{color:var(--bronze)}
+.note--yes .note__t{color:var(--sage)}
+.note p{margin:0 0 .45rem; color:var(--ink-soft)}
+.note p:last-child{margin-bottom:0}
+
+/* ═══════════ FOOTER ═══════════ */
+.foot{margin-top:2.5rem; padding-top:1.5rem; border-top:3px double var(--line-strong);
+  display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:space-between; align-items:flex-start}
+.foot__b{font-size:.82rem; color:var(--muted); line-height:1.65}
+.foot__b strong{display:block; font-family:var(--serif); font-size:.96rem;
+  color:var(--ink); margin-bottom:.2rem}
+.foot__b a{color:var(--indigo); text-decoration:none}
+.foot__seal{font-size:.67rem; font-weight:700; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--bronze); border:1px solid var(--bronze); padding:.5rem .85rem; border-radius:3px;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+
+/* ═══════════ PRINT ═══════════ */
+@page{size:A4; margin:13mm 12mm}
+@media print{
+  :root{
+    --ink:#111827; --ink-soft:#1F2937; --muted:#4B5563; --faint:#6B7280;
+    --paper:#fff; --surface:#fff; --band:#F3F4F8;
+    --line:#C9CEDD; --line-strong:#94A0BE;
+    --indigo:#1F3168; --indigo-soft:#EEF1F9;
+    --bronze:#7A5312; --bronze-soft:#FAF4E6;
+    --sage:#245840; --sage-soft:#EBF4EF;
+    --rust:#8A2E20; --rust-soft:#FBEEEB;
+  }
+  body{background:#fff; font-size:9.8pt; line-height:1.5}
+  .bar{display:none !important}
+  .sheet{max-width:none; margin:0; padding:0; border:0}
+  .tbl,table,.note,.due,.pay,.letterhead,.foot,.parties{break-inside:avoid; page-break-inside:avoid}
+  tr{break-inside:avoid; page-break-inside:avoid}
+  .letterhead__logo{width:7.4rem; height:7.4rem; text-decoration:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LOGO ═══════════ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <linearGradient id="msRing" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0%" stop-color="#FFF7CB"/>
+      <stop offset="20%" stop-color="#EAC661"/>
+      <stop offset="45%" stop-color="#A97C22"/>
+      <stop offset="68%" stop-color="#F4DE95"/>
+      <stop offset="86%" stop-color="#B8892A"/>
+      <stop offset="100%" stop-color="#8A6316"/>
+    </linearGradient>
+    <radialGradient id="msField" cx="50%" cy="44%" r="72%">
+      <stop offset="0%" stop-color="#4C3718"/>
+      <stop offset="52%" stop-color="#2A1D0C"/>
+      <stop offset="100%" stop-color="#0D0803"/>
+    </radialGradient>
+    <linearGradient id="msSunGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF2600"/>
+      <stop offset="40%" stop-color="#FF5A00"/>
+      <stop offset="70%" stop-color="#FFB200"/>
+      <stop offset="100%" stop-color="#FFF287"/>
+    </linearGradient>
+    <linearGradient id="msWord" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8977"/>
+      <stop offset="30%" stop-color="#F63421"/>
+      <stop offset="100%" stop-color="#C3130A"/>
+    </linearGradient>
+    <symbol id="midsun-logo" viewBox="0 0 500 500">
+      <circle cx="250" cy="250" r="246" fill="url(#msRing)"/>
+      <circle cx="250" cy="250" r="229" fill="#150D05"/>
+      <circle cx="250" cy="250" r="223" fill="url(#msField)"/>
+      <g fill="#E8301A">
+        <path d="M245,163 L255,163 L250,113 Z" transform="rotate(-90 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(-80 250 247)"/>
+        <path d="M245,163 L255,163 L250,111 Z" transform="rotate(-70 250 247)"/>
+        <path d="M245,163 L255,163 L250,103 Z" transform="rotate(-60 250 247)"/>
+        <path d="M245,163 L255,163 L250,109 Z" transform="rotate(-50 250 247)"/>
+        <path d="M245,163 L255,163 L250,101 Z" transform="rotate(-40 250 247)"/>
+        <path d="M245,163 L255,163 L250,107 Z" transform="rotate(-30 250 247)"/>
+        <path d="M245,163 L255,163 L250,99 Z"  transform="rotate(-20 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(-10 250 247)"/>
+        <path d="M245,163 L255,163 L250,97 Z"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(10 250 247)"/>
+        <path d="M245,163 L255,163 L250,99 Z"  transform="rotate(20 250 247)"/>
+        <path d="M245,163 L255,163 L250,107 Z" transform="rotate(30 250 247)"/>
+        <path d="M245,163 L255,163 L250,101 Z" transform="rotate(40 250 247)"/>
+        <path d="M245,163 L255,163 L250,109 Z" transform="rotate(50 250 247)"/>
+        <path d="M245,163 L255,163 L250,103 Z" transform="rotate(60 250 247)"/>
+        <path d="M245,163 L255,163 L250,111 Z" transform="rotate(70 250 247)"/>
+        <path d="M245,163 L255,163 L250,105 Z" transform="rotate(80 250 247)"/>
+        <path d="M245,163 L255,163 L250,113 Z" transform="rotate(90 250 247)"/>
+      </g>
+      <path d="M174,247 A76,76 0 0 1 326,247 Z" fill="url(#msSunGrad)"/>
+      <g font-family="'Arial Black','Franklin Gothic Heavy',Impact,sans-serif" font-weight="900" fill="url(#msWord)">
+        <text x="234" y="313" font-size="80" text-anchor="end">MID</text>
+        <text x="272" y="313" font-size="80" text-anchor="start">SUN</text>
+      </g>
+      <rect x="240" y="277" width="26" height="14" fill="url(#msWord)"/>
+      <text x="250" y="353" text-anchor="middle" fill="#F2A93C" font-size="25"
+            font-family="Arial,Helvetica,sans-serif" font-weight="700"
+            letter-spacing="2.4">A HOLDING COMPANY</text>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="bar">
+  <div class="bar__in">
+    <svg class="bar__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN"><use href="#midsun-logo"/></svg>
+    <div class="bar__id">Ghorpadepatil &amp; Team<span>Sangamner 360 · Advance Payment Invoice</span></div>
+    <div class="bar__sp"></div>
+    <button class="btn" id="themeBtn" type="button">डार्क / लाइट</button>
+    <button class="btn btn--primary" id="pdfBtn" type="button">⭳ Download PDF</button>
+  </div>
+</div>
+
+<main class="sheet">
+
+<div class="letterhead">
+  <svg class="letterhead__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN - A Holding Company"><use href="#midsun-logo"/></svg>
+  <div class="letterhead__org">
+    <p class="letterhead__name">Ghorpadepatil &amp; Team</p>
+    <p class="letterhead__meta">
+      <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+      <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+      <a href="tel:9404423429">9404423429</a> (Primary · WhatsApp)<br>
+      <a href="tel:9684008406">9684008406</a> (Call / WhatsApp)
+    </p>
+  </div>
+</div>
+
+<div class="invhead">
+  <div>
+    <p class="invhead__s">App Research, Design &amp; Development · Advance Payment 10%</p>
+    <h1 class="invhead__t">देयक / INVOICE</h1>
+  </div>
+  <div class="invmeta">
+    <!-- ↓ Invoice क्रमांक व तारखा येथे बदला ↓ -->
+    <div class="invmeta__row"><div class="invmeta__k">Invoice No.</div><div class="invmeta__v">KPT / 2026-27 / 001</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">Invoice दिनांक</div><div class="invmeta__v">02 / 08 / 2026</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">देय दिनांक</div><div class="invmeta__v">त्वरित (On Receipt)</div></div>
+  </div>
+</div>
+
+<div class="parties">
+  <div class="parties__c">
+    <span class="parties__k">देयक कोणाकडून (From)</span>
+    <p class="parties__n">Ghorpadepatil &amp; Team</p>
+    <p class="parties__d">
+      App Research, Design &amp; Development<br>
+      <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+      <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+      <a href="tel:9404423429">9404423429</a> (Primary · WhatsApp)<br>
+      <a href="tel:9684008406">9684008406</a> (Call / WhatsApp)
+    </p>
+  </div>
+  <div class="parties__c">
+    <span class="parties__k">देयक कोणासाठी (Bill To)</span>
+    <p class="parties__n">Mr. Pritam Jadhav</p>
+    <p class="parties__d">
+      Sangamner, Dist: Ahilyanagar,<br>
+      Maharashtra State, India<br>
+      प्रकल्प: Sangamner 360
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════ LINE ITEM ═══════════ -->
+<div class="tbl">
+  <table>
+    <thead>
+      <tr><th class="num">क्र</th><th>तपशील (Description)</th><th class="num">रक्कम</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="num">१</td>
+        <td class="k">App Research, Design &amp; Development - Sangamner 360
+          <br><span style="font-weight:400; color:var(--muted); font-size:.85em">
+          Advance Payment - करारानुसार पहिला टप्पा, एकूण प्रकल्प किंमतीच्या <strong>10%</strong></span>
+        </td>
+        <td class="num">₹59,000</td>
+      </tr>
+      <tr class="total">
+        <td class="num">-</td>
+        <td>एकूण देय रक्कम (Total Due)</td>
+        <td class="num">₹59,000</td>
+      </tr>
+    </tbody>
+    <caption>अक्षरी: <strong>एकोणसाठ हजार रुपये फक्त</strong> · In words: <strong>Rupees Fifty Nine Thousand Only</strong></caption>
+  </table>
+</div>
+
+<div class="due">
+  <div>
+    <p class="due__l">आता भरावयाची रक्कम</p>
+    <p class="due__w">हे देयक प्राप्त झाल्यानंतरच प्रकल्पाचे काम सुरू करण्यात येईल.</p>
+  </div>
+  <div class="due__a">₹59,000/-</div>
+</div>
+
+<!-- ═══════════ TWO-STEP PAYMENT ═══════════ -->
+<div class="sh"><span class="sh__n">१</span><h2 class="sh__t">पैसे कसे पाठवावेत - दोन टप्प्यांत</h2></div>
+
+<div class="note note--yes">
+  <span class="note__t">सुरक्षिततेसाठी दोन टप्प्यांत पेमेंट</span>
+  <p>पूर्ण रक्कम एकाच वेळी पाठवू नये. <strong>प्रथम फक्त ₹100</strong> ही चाचणी रक्कम (Test Payment) पाठवावी. ती आम्हाला मिळाल्याची <strong>पुष्टी (Confirmation)</strong> आम्ही WhatsApp किंवा Email वर देऊ. त्यानंतरच उर्वरित <strong>₹58,900</strong> ही रक्कम पाठवावी.</p>
+  <p>यामुळे खाते क्रमांक, UPI ID किंवा Wallet Address चुकीचा असल्यास मोठी रक्कम अडकून पडण्याचा धोका पूर्णपणे टळतो.</p>
+</div>
+
+<div class="tbl">
+  <table>
+    <thead>
+      <tr><th class="num">टप्पा</th><th>काय करावे</th><th class="num">रक्कम</th></tr>
+    </thead>
+    <tbody>
+      <tr class="step1">
+        <td class="num">१</td>
+        <td class="k">चाचणी रक्कम (Test Payment) पाठवा
+          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">पाठवल्यानंतर Screenshot किंवा Transaction ID आम्हाला पाठवा</span>
+        </td>
+        <td class="num">₹100</td>
+      </tr>
+      <tr>
+        <td class="num">२</td>
+        <td class="k">आमची पुष्टी मिळाल्यानंतर उर्वरित रक्कम पाठवा
+          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">₹100 मिळाल्याचे आम्ही कळवल्याशिवाय ही रक्कम पाठवू नये</span>
+        </td>
+        <td class="num">₹58,900</td>
+      </tr>
+      <tr class="total">
+        <td class="num">-</td>
+        <td>एकूण (₹100 + ₹58,900)</td>
+        <td class="num">₹59,000</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══════════ PAYMENT METHODS ═══════════ -->
+<div class="sh"><span class="sh__n">२</span><h2 class="sh__t">पैसे भरण्याचे पर्याय</h2></div>
+
+<div class="note note--yes">
+  <span class="note__t">स्वीकारली जाणारी चलने (Accepted Currencies)</span>
+  <p>आपल्या सोयीनुसार खालीलपैकी कोणत्याही प्रकारे पैसे भरता येतील -
+    <strong>भारतीय रुपये (IN₹)</strong> ·
+    <strong>Litecoin (LTC)</strong> ·
+    <strong>Bitcoin (BTC)</strong> ·
+    <strong>इतर मान्यताप्राप्त Crypto</strong> ·
+    <strong>US Dollar (USD)</strong>.
+  </p>
+  <p>कोणतेही चलन वापरले तरी आमच्याकडे <strong>₹59,000</strong> इतक्या पूर्ण मूल्याची रक्कम जमा होणे आवश्यक आहे. Crypto व USD साठी रूपांतर दर (Conversion Rate) पेमेंटच्या वेळी ठरेल व तो आधी लेखी confirm करून दिला जाईल.</p>
+</div>
+
+<div class="pays">
+
+  <!-- ── UPI ── -->
+  <div class="pay">
+    <div class="pay__h">
+      <h3 class="pay__t">UPI</h3>
+      <span class="pay__tag">IN₹ · Instant</span>
+    </div>
+    <table class="pay__rows">
+      <tr><td>नाव</td><td>Ghorpadepatil &amp; Team</td></tr>
+    </table>
+
+    <!-- ↓↓ आपला खरा UPI ID फक्त याच एका ओळीत लिहा ↓↓ -->
+    <div class="copyrow">
+      <div class="copyrow__in">
+        <span class="copyrow__k">UPI ID</span>
+        <span class="copyrow__v" id="upiId">ghorpadepatilmail@oksbi</span>
+      </div>
+      <button class="copybtn" type="button" data-copy="upiId">Copy</button>
+    </div>
+    <p class="pay__msg" style="margin-top:.55rem">Copy दाबून UPI ID कोणत्याही Payment App मध्ये Paste करा, किंवा खालील QR Scan करा.</p>
+
+    <!-- QR: Qr.jpeg ही फाईल याच folder मध्ये ठेवली की आपोआप दिसेल.
+         फाईल नसल्यास ही जागा आपोआप लपवली जाते - code बदलण्याची गरज नाही. -->
+    <div class="qrwrap">
+      <img class="qrimg" src="Qr.jpeg" alt="UPI QR Code"
+           onerror="this.closest('.qrwrap').style.display='none'">
+    </div>
+  </div>
+
+  <!-- ── NET BANKING ── -->
+  <div class="pay">
+    <div class="pay__h">
+      <h3 class="pay__t">Net Banking</h3>
+      <span class="pay__tag">IN₹ · NEFT / IMPS</span>
+    </div>
+    <table class="pay__rows">
+      <tr><td>Bank Name</td><td>IDFC First Bank</td></tr>
+      <tr><td>Account Name</td><td>Atharva Ghorpadepatil</td></tr>
+      <tr><td>Account No.</td><td>10175627889</td></tr>
+      <tr><td>Branch Name</td><td>Chakan</td></tr>
+      <tr><td>IFSC Code</td><td><span class="fill">IDFB0041438</span></td></tr>
+    </table>
+    <p class="pay__msg" style="margin-top:.6rem">Transfer झाल्यानंतर Screenshot किंवा UTR क्रमांक आम्हाला पाठवावा.</p>
+  </div>
+
+  <!-- ── CRYPTO ── -->
+  <div class="pay pay--crypto">
+    <div class="pay__h">
+      <h3 class="pay__t">Crypto</h3>
+      <span class="pay__tag">LTC · BTC</span>
+    </div>
+    <p class="pay__msg">Crypto ने पैसे भरायचे असल्यास कृपया <strong>WhatsApp किंवा Email वर संपर्क साधून Wallet Address मागवा</strong>. सुरक्षिततेच्या कारणास्तव Address या देयकावर छापलेला नाही - तो आपल्याला स्वतंत्रपणे पाठवला जाईल.</p>
+    <table class="pay__rows">
+      <tr><td>Litecoin</td><td>LTC</td></tr>
+      <tr><td>Bitcoin</td><td>BTC</td></tr>
+      <tr><td>इतर Crypto</td><td>विचारणा करावी</td></tr>
+      <tr><td>Address</td><td style="color:var(--bronze)">विनंतीनुसार पाठवला जाईल</td></tr>
+    </table>
+
+    <!-- QR: ltc-qr.png ही फाईल याच folder मध्ये ठेवली की आपोआप दिसेल. -->
+    <div class="qrwrap">
+      <img class="qrimg" src="ltc-qr.png" alt="Crypto QR Code"
+           onerror="this.closest('.qrwrap').style.display='none'">
+    </div>
+  </div>
+
+  <!-- ── USD ── -->
+  <div class="pay">
+    <div class="pay__h">
+      <h3 class="pay__t">US Dollar</h3>
+      <span class="pay__tag">USD · International</span>
+    </div>
+    <p class="pay__msg">परदेशातून किंवा USD मध्ये पैसे पाठवायचे असल्यास कृपया आम्हाला संपर्क साधावा. आपल्या सोयीनुसार योग्य पर्याय व तपशील स्वतंत्रपणे पाठवले जातील.</p>
+    <table class="pay__rows">
+      <tr><td>Currency</td><td>USD ($)</td></tr>
+      <tr><td>तपशील</td><td style="color:var(--bronze)">विनंतीनुसार पाठवला जाईल</td></tr>
+      <tr><td>Rate</td><td>पेमेंटच्या दिवशीच्या दरानुसार</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="note note--warn">
+  <span class="note__t">Crypto (Litecoin) ने पैसे भरताना</span>
+  <p><strong>१.</strong> Wallet Address आम्हाला WhatsApp किंवा Email वर मागवा. <strong>इतर कोणत्याही ठिकाणाहून मिळालेला Address वापरू नये.</strong></p>
+  <p><strong>२.</strong> LTC मध्ये किती रक्कम पाठवायची हे <strong>पेमेंटच्या वेळच्या Market Rate</strong> नुसार ठरेल. पाठवण्यापूर्वी अचूक LTC रक्कम आमच्याकडून लेखी confirm करून घ्यावी.</p>
+  <p><strong>३.</strong> येथेही <strong>प्रथम ₹100 इतक्या मूल्याची चाचणी रक्कम</strong> पाठवावी. ती मिळाल्याची पुष्टी मिळाल्यानंतरच उर्वरित रक्कम पाठवावी.</p>
+  <p><strong>४.</strong> फक्त <strong>Litecoin (LTC) Network</strong> वरूनच पाठवावे. चुकीच्या Network वरून पाठवलेली रक्कम परत मिळत नाही व त्यास Developer जबाबदार राहणार नाहीत.</p>
+  <p><strong>५.</strong> Network Fee ही Client यांनी भरावयाची असून आमच्या Wallet मध्ये पूर्ण <strong>₹59,000</strong> इतक्या मूल्याची रक्कम जमा होणे आवश्यक आहे.</p>
+  <p><strong>६.</strong> पाठवल्यानंतर <strong>Transaction ID (TXID)</strong> आम्हाला पाठवावा. Blockchain वर व्यवहार confirm झाल्यानंतरच देयक प्राप्त झाले असे मानले जाईल.</p>
+</div>
+
+<!-- ═══════════ TERMS ═══════════ -->
+<div class="sh"><span class="sh__n">३</span><h2 class="sh__t">अटी (Terms)</h2></div>
+<div class="tbl">
+  <table>
+    <thead><tr><th class="num">क्र</th><th>अट</th></tr></thead>
+    <tbody>
+      <tr><td class="num">१</td><td>हे देयक <strong>Sangamner 360</strong> या प्रकल्पाच्या करारानुसार पहिल्या टप्प्याचे (Advance - 10%) आहे.</td></tr>
+      <tr><td class="num">२</td><td>संपूर्ण <strong>₹59,000</strong> प्राप्त झाल्यानंतरच प्रकल्पाचे प्रत्यक्ष काम सुरू करण्यात येईल.</td></tr>
+      <tr><td class="num">३</td><td>प्रथम <strong>₹100</strong> चाचणी रक्कम पाठवावी; आमची पुष्टी मिळाल्यानंतरच उर्वरित <strong>₹58,900</strong> पाठवावेत.</td></tr>
+      <tr><td class="num">४</td><td>Hosting, Domain, Server, Google Play, Apple Developer व इतर Third-Party खर्च या रकमेत <strong>समाविष्ट नाहीत</strong>.</td></tr>
+      <tr><td class="num">५</td><td>पैसे भरल्यानंतर Payment Receipt उपलब्ध करून देण्यात येईल.</td></tr>
+      <tr><td class="num">६</td><td>कोणतीही शंका असल्यास वरील Email किंवा WhatsApp क्रमांकावर संपर्क साधावा.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer class="foot">
+  <div class="foot__b">
+    <strong>Ghorpadepatil &amp; Team</strong>
+    Email · <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+    Email · <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+    Primary · WhatsApp · <a href="tel:9404423429">9404423429</a><br>
+    Call / WhatsApp · <a href="tel:9684008406">9684008406</a>
+  </div>
+  <div class="foot__b">
+    <strong>Sangamner 360</strong>
+    Advance Payment Invoice - 10%<br>
+    Prepared for Mr. Pritam Jadhav
+  </div>
+</footer>
+
+</main>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  document.getElementById('pdfBtn').addEventListener('click', function(){ window.print(); });
+
+  /* ── Copy बटणे (UPI ID वगैरे) ── */
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var el = document.getElementById(btn.getAttribute('data-copy'));
+      if(!el) return;
+      var txt = el.textContent.trim();
+
+      function done(){
+        var old = btn.textContent;
+        btn.textContent = '✓ Copied';
+        btn.classList.add('is-done');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('is-done'); }, 1800);
+      }
+      function fallback(){
+        var t = document.createElement('textarea');
+        t.value = txt; t.style.position = 'fixed'; t.style.opacity = '0';
+        document.body.appendChild(t); t.select();
+        try{ document.execCommand('copy'); done(); }
+        catch(e){
+          var r = document.createRange(); r.selectNodeContents(el);
+          var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+          btn.textContent = 'निवडले - Ctrl+C';
+        }
+        document.body.removeChild(t);
+      }
+
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, fallback);
+      } else { fallback(); }
+    });
+  });
+  document.getElementById('themeBtn').addEventListener('click', function(){
+    var isDark = root.getAttribute('data-theme') === 'dark'
+      || (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  });
+})();
+</script>
+
+</body>
+</html>
