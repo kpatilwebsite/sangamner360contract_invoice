@@ -256,6 +256,16 @@ caption strong{color:var(--ink)}
 .btn--invoice{display:inline-block; text-decoration:none; background:var(--bronze);
   border-color:var(--bronze); color:#fff; font-size:.88rem; padding:.6rem 1.1rem}
 .btn--invoice:hover{background:var(--ink); border-color:var(--ink); color:#fff}
+.accept__paid{margin-top:1.1rem; padding:1rem 1.15rem; border:2px solid var(--sage);
+  border-radius:4px; background:var(--sage-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.accept__paidt{display:block; font-size:.72rem; font-weight:700; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--sage); margin-bottom:.7rem}
+.accept__paidtbl{width:100%; border-collapse:collapse; font-size:.86rem; margin-bottom:.85rem}
+.accept__paidtbl td{padding:.45rem .5rem; border-bottom:1px solid var(--line); color:var(--ink-soft)}
+.accept__paidtbl tr:last-child td{border-bottom:0}
+.accept__paidtbl tr.total td{font-weight:700; color:var(--ink); border-top:2px solid var(--sage)}
+.accept__paid p{font-size:.87rem; color:var(--ink-soft); margin:0 0 .85rem}
 .accept__fine{font-size:.77rem; color:var(--muted); margin:1.1rem 0 0; line-height:1.6;
   padding-top:.85rem; border-top:1px solid var(--line)}
 
@@ -268,6 +278,7 @@ caption strong{color:var(--ink)}
 .foot__block strong{display:block; font-family:var(--serif); font-size:.98rem;
   color:var(--ink); margin-bottom:.2rem}
 .foot__block a{color:var(--indigo); text-decoration:none}
+.foot__seal.is-confirmed{color:var(--sage); border-color:var(--sage); border-width:2px}
 .foot__seal{font-size:.68rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
   color:var(--bronze); border:1px solid var(--bronze); padding:.5rem .85rem; border-radius:3px;
   -webkit-print-color-adjust:exact; print-color-adjust:exact}
@@ -404,7 +415,7 @@ caption strong{color:var(--ink)}
       <a href="#s7"><b>७</b>स्वीकृतीची पद्धत</a>
       <a href="#s8"><b>A</b>Hosting खर्च</a>
       <a href="#s9"><b>B</b>किंमत विभागणी</a>
-      <a href="#s10" class="nav__go"><b>✓</b>संमती द्या</a>
+      <a href="#s10" class="nav__go"><b>✓</b>संमती नोंदवली</a>
     </div>
   </nav>
 </div>
@@ -448,7 +459,8 @@ caption strong{color:var(--ink)}
         <tr><td class="k">Developer</td><td>Ghorpadepatil &amp; Team<br>kgpatilmail@gmail.com · midsungroupmail@gmail.com<br>9404423429 (Primary · WhatsApp)</td><td>-</td></tr>
         <tr><td class="k">प्रकल्पाचे नाव</td><td>Sangamner 360</td><td>-</td></tr>
         <tr><td class="k">दस्तऐवज</td><td>करार (Contract) · दिनांक 02 / 08 / 2026</td><td>-</td></tr>
-        <tr><td class="k">दस्तऐवज स्थिती</td><td><span class="chip chip--tent">Client Confirmation Pending</span></td><td>विभाग ७</td></tr>
+        <tr><td class="k">दस्तऐवज स्थिती</td><td><span class="chip chip--yes" id="docStatus">Client Confirmed - 02 / 08 / 2026</span></td><td>अंतिम विभाग</td></tr>
+        <tr><td class="k">Advance Payment स्थिती</td><td><span class="chip chip--yes">प्राप्त (Paid) - ₹59,000 · 02 / 08 / 2026</span></td><td>विभाग ४ · Invoice</td></tr>
 
         <tr class="sub"><td colspan="3">आर्थिक</td></tr>
         <tr><td class="k">एकूण प्रकल्प किंमत</td><td><strong>₹5,90,000/-</strong> (Lump-Sum, संपूर्ण प्रकल्पासाठी)</td><td>विभाग ४</td></tr>
@@ -538,6 +550,9 @@ caption strong{color:var(--ink)}
         <tr><td class="num">३४</td><td>Admin Dashboard</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
         <tr><td class="num">३५</td><td>Analytics</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
         <tr><td class="num">३६</td><td>Advertisement Management</td><td>Admin</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३७</td><td><strong>Unique Business Number</strong><br><em>प्रत्येक व्यवसायाला स्वतःचा न बदलणारा युनिक क्रमांक (विभाग १.४)</em></td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३८</td><td><strong>Business Number ने Search</strong><br><em>फक्त क्रमांक टाकून ते दुकान / व्यवसाय थेट शोधता येईल</em></td><td>Search</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३९</td><td><strong>DIY Marketplace</strong><br><em>स्थानिक Handmade व DIY वस्तूंसाठी स्वतंत्र Category विभाग</em></td><td>Business Directory</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -577,7 +592,24 @@ caption strong{color:var(--ink)}
         <tr><td class="num">२७</td><td>Auto Rickshaw</td><td>वाहतूक</td></tr>
         <tr><td class="num">२८</td><td>Tours</td><td>पर्यटन</td></tr>
         <tr><td class="num">२९</td><td>Security</td><td>इतर सेवा</td></tr>
+        <tr><td class="num">३०</td><td><strong>DIY Marketplace</strong><br><em>स्थानिक कारागीर, Handmade व DIY वस्तूंची खरेदी-विक्री</em></td><td>Marketplace</td></tr>
       </tbody>
+    </table>
+  </div>
+
+  <div class="th"><span class="th__n">१.४</span><h3 class="th__t">Business Number - प्रत्येक व्यवसायाचा स्वतःचा क्रमांक</h3></div>
+  <p class="th__note">App मधील प्रत्येक नोंदणीकृत व्यवसायाला एक <strong>स्वतःचा युनिक (Unique) Business Number</strong> दिला जाईल. कोणताही वापरकर्ता फक्त तो क्रमांक टाकून ते दुकान किंवा व्यवसाय थेट शोधू शकेल.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th class="num">क्र</th><th>घटक</th><th>तपशील</th><th class="c">स्थिती</th></tr></thead>
+      <tbody>
+        <tr><td class="num">१</td><td class="k">Unique Business Number</td><td>नोंदणी पूर्ण होताच प्रत्येक व्यवसायाला एक न बदलणारा (Permanent) युनिक क्रमांक App कडून आपोआप दिला जाईल. दोन व्यवसायांना कधीही एकच क्रमांक मिळणार नाही.</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">२</td><td class="k">Number ने Search</td><td>Search चौकटीत फक्त तो क्रमांक टाकल्यास संबंधित दुकान / व्यवसायाचे Profile थेट उघडेल - नाव किंवा Category माहीत नसली तरी चालेल.</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">३</td><td class="k">Profile वर प्रदर्शन</td><td>हा क्रमांक व्यवसायाच्या Profile वर, Business Dashboard मध्ये व त्याच्या QR वर स्पष्टपणे दिसेल - जेणेकरून व्यावसायिक तो ग्राहकांना, Visiting Card वर किंवा दुकानाच्या Board वर देऊ शकतील.</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">४</td><td class="k">QR व Share</td><td>क्रमांकासोबत Share करण्याजोगी Link व QR उपलब्ध राहील - Scan केल्यास तेच Profile उघडेल.</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+        <tr><td class="num">५</td><td class="k">Admin नियंत्रण</td><td>Admin Panel मधून क्रमांकाची मालिका (Number Series) पाहता व व्यवस्थापित करता येईल.</td><td class="c"><span class="chip chip--yes">समाविष्ट</span></td></tr>
+      </tbody>
+      <caption>क्रमांकाचे नेमके स्वरूप (उदा. अंकांची संख्या किंवा SG-00123 सारखा Prefix) हे Development दरम्यान Client व Developer यांच्या परस्पर सहमतीने निश्चित केले जाईल.</caption>
     </table>
   </div>
 </section>
@@ -610,7 +642,7 @@ caption strong{color:var(--ink)}
         <tr><td class="num">१४</td><td>AI Chatbot / AI Automation</td><td>AI</td><td>Package 2 चा भाग</td></tr>
 
         <tr class="sub"><td colspan="4">भविष्यातील विस्तार (Package 2)</td></tr>
-        <tr><td class="num">१५</td><td>Marketplace Expansion</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
+        <tr><td class="num">१५</td><td>Marketplace Expansion - पूर्ण E-Commerce<br><em>Cart, Online Order, Shipping, Order Tracking, Seller Payout इत्यादी</em></td><td>Future</td><td>स्वतंत्र करार आवश्यक · <strong>विभाग १.३ मधील DIY Marketplace ही केवळ Listing Category आहे, पूर्ण E-Commerce नाही</strong></td></tr>
         <tr><td class="num">१६</td><td>Future Premium Modules</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
         <tr><td class="num">१७</td><td>ERP / Billing Software</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
         <tr><td class="num">१८</td><td>CRM Software</td><td>Future</td><td>स्वतंत्र करार आवश्यक</td></tr>
@@ -706,13 +738,13 @@ caption strong{color:var(--ink)}
   <div class="th"><span class="th__n">४.१</span><h3 class="th__t">प्रकल्पाची किंमत व देयक टप्पे</h3></div>
   <div class="tbl">
     <table>
-      <thead><tr><th class="num">टप्पा</th><th>केव्हा अदा करावे</th><th class="num">टक्केवारी</th><th class="num">रक्कम</th></tr></thead>
+      <thead><tr><th class="num">टप्पा</th><th>केव्हा अदा करावे</th><th class="num">टक्केवारी</th><th class="num">रक्कम</th><th class="c">स्थिती</th></tr></thead>
       <tbody>
-        <tr><td class="num">१</td><td>Advance - Development सुरू होण्यापूर्वी</td><td class="num">10%</td><td class="num">₹59,000</td></tr>
-        <tr><td class="num">२</td><td>UI / UX Design मंजुरीनंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
-        <tr><td class="num">३</td><td>Development पूर्ण झाल्यानंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
-        <tr><td class="num">४</td><td>Testing नंतर व Final Delivery पूर्वी</td><td class="num">30%</td><td class="num">₹1,77,000</td></tr>
-        <tr class="total"><td class="num">-</td><td>एकूण प्रकल्प किंमत (Lump-Sum)</td><td class="num">100%</td><td class="num">₹5,90,000</td></tr>
+        <tr><td class="num">१</td><td>Advance - Development सुरू होण्यापूर्वी</td><td class="num">10%</td><td class="num">₹59,000</td><td class="c"><span class="chip chip--yes">प्राप्त (Paid)</span></td></tr>
+        <tr><td class="num">२</td><td>UI / UX Design मंजुरीनंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td><td class="c"><span class="chip chip--tent">प्रलंबित</span></td></tr>
+        <tr><td class="num">३</td><td>Development पूर्ण झाल्यानंतर</td><td class="num">30%</td><td class="num">₹1,77,000</td><td class="c"><span class="chip chip--tent">प्रलंबित</span></td></tr>
+        <tr><td class="num">४</td><td>Testing नंतर व Final Delivery पूर्वी</td><td class="num">30%</td><td class="num">₹1,77,000</td><td class="c"><span class="chip chip--tent">प्रलंबित</span></td></tr>
+        <tr class="total"><td class="num">-</td><td>एकूण प्रकल्प किंमत (Lump-Sum)</td><td class="num">100%</td><td class="num">₹5,90,000</td><td class="c">-</td></tr>
       </tbody>
       <caption>ही रक्कम संपूर्ण प्रकल्पासाठी एकत्रित निश्चित करण्यात आली आहे. करारात नमूद कोणत्याही सेवेसाठी स्वतंत्र किंमत लागू राहणार नाही.</caption>
     </table>
@@ -964,8 +996,8 @@ caption strong{color:var(--ink)}
   </div>
 
   <div class="note note--yes">
-    <span class="note__t">संमती कोठे द्यावी</span>
-    <p>संपूर्ण करार वाचून झाल्यानंतर, या दस्तऐवजाच्या <strong>अगदी शेवटी</strong> दिलेल्या चौकटीत नाव लिहून संमती द्यावी. वरील पट्टीतील <strong>“✓ संमती”</strong> हे बटण दाबूनही तेथे थेट जाता येईल.</p>
+    <span class="note__t">संमती नोंदवली गेली आहे</span>
+    <p>या करारास Client <strong>Mr. Pritam Jadhav</strong> यांची संमती <strong>दिनांक 02 / 08 / 2026</strong> रोजी नोंदवण्यात आली असून ती दस्तऐवजाच्या <strong>अगदी शेवटी</strong> Locked स्वरूपात दिसते. वरील पट्टीतील <strong>“✓ संमती नोंदवली”</strong> हे बटण दाबून तेथे थेट जाता येईल.</p>
   </div>
 </section>
 
@@ -1087,9 +1119,11 @@ caption strong{color:var(--ink)}
         <tr><td class="num">१३</td><td>Testing &amp; Quality Assurance</td><td class="num">₹20,000</td></tr>
         <tr><td class="num">१४</td><td>Deployment, Play Store व App Store Publishing Assistance</td><td class="num">₹15,000</td></tr>
         <tr><td class="num">१५</td><td>Professional Logo Design</td><td class="num">₹0<br><em>Complimentary</em></td></tr>
+        <tr><td class="num">१६</td><td>Unique Business Number व Number-आधारित Search (विभाग १.४)</td><td class="num">₹0<br><em>Business Directory मध्ये समाविष्ट</em></td></tr>
+        <tr><td class="num">१७</td><td>DIY Marketplace Category (विभाग १.३)</td><td class="num">₹0<br><em>Categories मध्ये समाविष्ट</em></td></tr>
         <tr class="total"><td class="num">-</td><td>एकूण प्रकल्प किंमत</td><td class="num">₹5,90,000</td></tr>
       </tbody>
-      <caption>यामध्ये Type 2 AI Voice Search, AI Recommendations, Marketplace व इतर Optional / Future Features (विभाग २ मध्ये नमूद) यांचा समावेश नाही - त्या स्वतंत्रपणे Quote केल्या जातील.</caption>
+      <caption>यामध्ये Type 2 AI Voice Search, AI Recommendations, पूर्ण E-Commerce Marketplace Expansion व इतर Optional / Future Features (विभाग २ मध्ये नमूद) यांचा समावेश नाही - त्या स्वतंत्रपणे Quote केल्या जातील. क्र. १६ व १७ या बाबी विद्यमान ₹5,90,000/- या रकमेतच <strong>अतिरिक्त शुल्काशिवाय</strong> समाविष्ट करण्यात आल्या आहेत - त्यामुळे एकूण किंमतीत कोणताही बदल होत नाही.</caption>
     </table>
   </div>
 </section>
@@ -1097,50 +1131,32 @@ caption strong{color:var(--ink)}
 <!-- ══════════ अंतिम · संमती ══════════ -->
 <section class="sec" id="s10">
   <div class="sec__band"><span class="sec__n">अंतिम</span><h2 class="sec__t">करार स्वीकृती (Digital Acceptance)</h2></div>
-  <p class="sec__lead">संपूर्ण करार - प्रकल्पाची व्याप्ती, किंमत, वेळापत्रक, सर्व अटी व दोन्ही परिशिष्टे - वाचल्यानंतर खाली आपली संमती नोंदवावी.</p>
+  <p class="sec__lead">संपूर्ण करार - प्रकल्पाची व्याप्ती, किंमत, वेळापत्रक, सर्व अटी व दोन्ही परिशिष्टे - वाचून झाल्यानंतर Client यांची संमती खालीलप्रमाणे नोंदवण्यात आली आहे.</p>
 
-  <div class="accept" id="accept">
+  <div class="accept is-locked" id="accept">
 
-    <div class="accept__live" id="acLive">
-      <h4 class="accept__h">करारास संमती द्या</h4>
-      <p class="accept__lead">खालील तीन पायऱ्या पूर्ण करा - नाव लिहा, दिनांक तपासा आणि संमतीची हिरवी चौकट Tick करा. Tick केल्याबरोबर संमती नोंदवली जाईल.</p>
-
-      <div class="accept__grid">
-        <label class="accept__field">
-          <span>१ · Client चे पूर्ण नाव</span>
-          <input type="text" id="acName" autocomplete="name" placeholder="उदा. Pritam Jadhav">
-        </label>
-        <label class="accept__field">
-          <span>२ · दिनांक</span>
-          <input type="date" id="acDate">
-        </label>
-      </div>
-
-      <p class="accept__step">३ · संमतीची चौकट Tick करा</p>
-      <label class="accept__check" for="acTick">
-        <input type="checkbox" id="acTick">
-        <span class="accept__box" aria-hidden="true"></span>
-        <span class="accept__txt">मी हा संपूर्ण करार वाचला असून त्यातील प्रकल्पाची व्याप्ती, एकूण किंमत <strong>₹5,90,000/-</strong>, देयक टप्पे, वेळापत्रक व सर्व अटी मला <strong>मान्य</strong> आहेत. प्रकल्प सुरू करण्यास माझी संमती आहे.</span>
-      </label>
-
-      <p class="accept__hint" id="acHint">⚠ Tick केल्याबरोबर संमती <strong>कायमची</strong> नोंदवली जाईल व ती नंतर काढून टाकता येणार नाही.</p>
-    </div>
-
-    <div class="accept__done" id="acDone" hidden>
+    <div class="accept__done" id="acDone">
       <div class="accept__stamp">
         <span class="accept__tickmark">✓</span>
         <div class="accept__stampin">
-          <strong id="acStampName"></strong>
-          <span id="acStampMeta"></span>
+          <strong id="acStampName">Mr. Pritam Jadhav - संमती नोंदवली</strong>
+          <span id="acStampMeta">दिनांक 02 / 08 / 2026 · Sangamner 360 · करार</span>
         </div>
         <span class="accept__lockbadge">🔒 Locked</span>
       </div>
-      <p class="accept__locked">ही संमती आता <strong>निश्चित (Locked)</strong> झाली असून ती बदलता किंवा काढून टाकता येणार नाही.</p>
+      <p class="accept__locked">ही संमती आता <strong>निश्चित (Locked)</strong> झाली असून ती बदलता किंवा काढून टाकता येणार नाही. करारातील प्रकल्पाची व्याप्ती, एकूण किंमत <strong>₹5,90,000/-</strong>, देयक टप्पे, वेळापत्रक व सर्व अटी Client यांना <strong>मान्य</strong> आहेत.</p>
 
-      <div class="accept__next screen-only">
-        <span class="accept__nextt">पुढील पायरी - Advance Payment</span>
-        <p>संमती नोंदवल्याबद्दल धन्यवाद. प्रकल्प सुरू करण्यासाठी आता <strong>10% Advance Payment - ₹59,000</strong> चे देयक (Invoice) उघडा.</p>
-        <a class="btn btn--invoice" id="acInvoice" href="invoice.html" target="_blank" rel="noopener">📄 Advance Payment Invoice उघडा - ₹59,000</a>
+      <div class="accept__paid">
+        <span class="accept__paidt">✓ Advance Payment प्राप्त झाले</span>
+        <table class="accept__paidtbl">
+          <tbody>
+            <tr><td>टप्पा १ · चाचणी रक्कम (Test Payment)</td><td class="num">₹100</td><td class="c"><span class="chip chip--yes">प्राप्त</span></td></tr>
+            <tr><td>टप्पा २ · उर्वरित रक्कम</td><td class="num">₹58,900</td><td class="c"><span class="chip chip--yes">प्राप्त</span></td></tr>
+            <tr class="total"><td>एकूण (₹100 + ₹58,900)</td><td class="num">₹59,000</td><td class="c"><span class="chip chip--yes">पूर्ण भरणा</span></td></tr>
+          </tbody>
+        </table>
+        <p>करारानुसार <strong>10% Advance Payment - ₹59,000</strong> दोन्ही टप्प्यांत पूर्णपणे प्राप्त झाले आहे (दिनांक 02 / 08 / 2026). यापुढे कोणतीही रक्कम या टप्प्यासाठी भरण्याची आवश्यकता नाही. प्रकल्पाचे काम सुरू करण्यात आले आहे.</p>
+        <a class="btn btn--invoice screen-only" id="acInvoice" href="invoice.html" target="_blank" rel="noopener">📄 ₹59,000 चे Invoice व जोडलेली पावती (Receipt) पहा</a>
       </div>
 
       <div class="accept__actions screen-only">
@@ -1150,7 +1166,7 @@ caption strong{color:var(--ink)}
       </div>
     </div>
 
-    <p class="accept__fine">ही नोंद Client यांच्या स्वतःच्या Browser मध्ये जतन केली जाते. Developer यांना ती दिसण्यासाठी Client यांनी हे पान <strong>PDF म्हणून Save करून</strong> किंवा <strong>Screenshot काढून</strong> पाठवावे. विभाग ७ नुसार WhatsApp, Email किंवा कोणतेही लेखी Digital Communication हे वैध स्वीकृती मानले जाईल.</p>
+    <p class="accept__fine">ही स्वीकृती व देयकाची नोंद या दस्तऐवजात <strong>कायमस्वरूपी</strong> नोंदवण्यात आली आहे - ती कोणत्याही Device वर, कोणत्याही Browser मध्ये सारखीच दिसेल. विभाग ७ नुसार WhatsApp, Email किंवा कोणतेही लेखी Digital Communication हे वैध स्वीकृती मानले जाईल.</p>
   </div>
 </section>
 
@@ -1170,7 +1186,7 @@ caption strong{color:var(--ink)}
     Prepared for Mr. Pritam Jadhav<br>
     करार (Contract) · 02 / 08 / 2026
   </div>
-  <div class="foot__seal">Client Confirmation Pending</div>
+  <div class="foot__seal is-confirmed" id="footSeal">Client Confirmed - Mr. Pritam Jadhav</div>
 </footer>
 
 <p class="print-only" style="margin-top:1.25rem; font-size:8pt; color:#6B7280; text-align:center; border-top:1px solid #C9CEDD; padding-top:.5rem">
@@ -1201,7 +1217,11 @@ caption strong{color:var(--ink)}
     var anyHit = false;
 
     secs.forEach(function(sec){
-      var rows = sec.querySelectorAll('tbody tr');
+      /* संमती / भरणा यांचा तक्ता Search मुळे कधीही लपवू नये */
+      var rows = Array.prototype.filter.call(
+        sec.querySelectorAll('tbody tr'),
+        function(tr){ return !tr.closest('.accept__paidtbl'); }
+      );
       var hits = 0;
 
       rows.forEach(function(tr){
@@ -1245,23 +1265,20 @@ caption strong{color:var(--ink)}
      ↓↓ Developer चा WhatsApp क्रमांक येथे बदला (देश कोडसह, + किंवा space नाही) ↓↓ */
   var DEV_WA = "919404423429";
 
-  var box    = document.getElementById('accept');
-  var acLive = document.getElementById('acLive');
-  var acDone = document.getElementById('acDone');
-  var acName = document.getElementById('acName');
-  var acDate = document.getElementById('acDate');
-  var acTick = document.getElementById('acTick');
-  var acHint = document.getElementById('acHint');
+  /* संमती व Advance Payment ही आता दस्तऐवजातच कायमस्वरूपी नोंदवलेली आहे.
+     पूर्वी ती फक्त Client यांच्या Browser च्या localStorage मध्ये जतन होत असे -
+     त्यामुळे दुसऱ्या Device वर किंवा दुसऱ्या Browser मध्ये पान उघडल्यास ती
+     पुन्हा "Confirmation Pending" दिसे. तो दोष येथे कायमचा दूर करण्यात आला आहे. */
+  var CLIENT_NAME = "Mr. Pritam Jadhav";
+  var ACCEPT_DATE = "2026-08-02";
+
   var acSend = document.getElementById('acSend');
   var acPdf  = document.getElementById('acPdf');
   var acMsg  = document.getElementById('acMsg');
-  var STORE  = 'sbl-accept-locked-v1';
 
-  function today(){
-    var d = new Date();
-    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0')
-           + '-' + String(d.getDate()).padStart(2,'0');
-  }
+  /* जुनी localStorage नोंद असल्यास ती काढून टाका - आता तिचा वापर नाही */
+  try{ localStorage.removeItem('sbl-accept-locked-v1'); }catch(e){}
+
   function pretty(iso){
     if(!iso) return '';
     var p = iso.split('-');
@@ -1276,100 +1293,16 @@ caption strong{color:var(--ink)}
       + 'दिनांक: ' + pretty(d) + '\nClient: ' + n;
   }
 
-  /* लॉक झालेली संमती दाखवा - ही स्थिती बदलता येत नाही */
-  function showLocked(n, d, stamped){
-    box.classList.add('is-locked');
-    acLive.hidden = true;
-    acDone.hidden = false;
-    document.getElementById('acStampName').textContent = n + ' - संमती नोंदवली';
-    document.getElementById('acStampMeta').textContent =
-      'दिनांक ' + pretty(d) + ' · वेळ ' + stamped
-      + ' · Sangamner 360 · करार';
-    acSend.onclick = function(){
-      window.open('https://wa.me/' + DEV_WA + '?text=' + encodeURIComponent(confirmText(n, d)), '_blank');
+  /* WhatsApp वर स्वीकृतीचा संदेश पाठवा (ऐच्छिक) */
+  if(acSend){
+    acSend.addEventListener('click', function(){
+      window.open('https://wa.me/' + DEV_WA + '?text='
+        + encodeURIComponent(confirmText(CLIENT_NAME, ACCEPT_DATE)), '_blank');
       acMsg.textContent = 'WhatsApp उघडले - संदेश पाठवा.';
-    };
-  }
-
-  acDate.value = today();
-
-  /* ── Developer testing escape hatch ──────────────────────────────
-     फाईल उघडताना पत्त्याच्या शेवटी ?reset लावल्यास नोंदवलेली संमती
-     पुसली जाते व चौकट पुन्हा कोरी होते. Client ला हे दिसत नाही.
-     उदा.  ...App_Development_Agreement_Sangamner.html?reset
-     ───────────────────────────────────────────────────────────── */
-  if(location.search.indexOf('reset') !== -1 || location.hash.indexOf('reset') !== -1){
-    try{ localStorage.removeItem(STORE); }catch(e){}
-  }
-
-  /* लपलेला Reset - वरील पट्टीतील MID-SUN logo वर सलग ५ वेळा Click करा.
-     Client ला हे माहीत नसल्याने चुकून होणार नाही. */
-  (function(){
-    var barLogo = document.querySelector('.bar__logo');
-    if(!barLogo) return;
-    var hits = 0, timer = null;
-    barLogo.style.cursor = 'pointer';
-    barLogo.addEventListener('click', function(){
-      hits++;
-      clearTimeout(timer);
-      timer = setTimeout(function(){ hits = 0; }, 1500);
-      if(hits < 5) return;
-      hits = 0;
-      if(window.confirm('Developer Reset\n\nनोंदवलेली संमती पुसून टाकायची आहे का?\n(फक्त चाचणीसाठी वापरा)')){
-        try{ localStorage.removeItem(STORE); }catch(e){}
-        location.reload();
-      }
-    });
-  })();
-
-  /* Console मधून Reset करण्यासाठी:  resetTick()  */
-  window.resetTick = function(){
-    try{ localStorage.removeItem(STORE); }catch(e){}
-    location.reload();
-  };
-
-  var saved = null;
-  try{ saved = JSON.parse(localStorage.getItem(STORE) || 'null'); }catch(e){}
-
-  if(saved && saved.locked){
-    /* आधीच नोंदवलेली संमती - थेट Locked स्थिती दाखवा */
-    showLocked(saved.n, saved.d, saved.at);
-  } else {
-    /* Tick करताच संमती कायमची नोंदवली जाते */
-    acTick.addEventListener('change', function(){
-      if(!acTick.checked) return;
-
-      var n = acName.value.trim(), d = acDate.value;
-
-      if(n.length < 2){
-        acTick.checked = false;
-        acHint.innerHTML = '⚠ कृपया प्रथम आपले <strong>पूर्ण नाव</strong> लिहा, नंतर चौकट Tick करा.';
-        acName.focus();
-        return;
-      }
-      if(!d){
-        acTick.checked = false;
-        acHint.innerHTML = '⚠ कृपया <strong>दिनांक</strong> निवडा.';
-        acDate.focus();
-        return;
-      }
-
-      var ok = window.confirm(
-        'संमती नोंदवायची आहे का?\n\n'
-        + 'नाव: ' + n + '\n'
-        + 'दिनांक: ' + pretty(d) + '\n\n'
-        + 'एकदा नोंदवल्यानंतर ही संमती बदलता किंवा काढून टाकता येणार नाही.'
-      );
-
-      if(!ok){ acTick.checked = false; return; }
-
-      var at = new Date().toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
-      try{ localStorage.setItem(STORE, JSON.stringify({n:n, d:d, at:at, locked:true})); }catch(e){}
-      showLocked(n, d, at);
     });
   }
 
-  acPdf.addEventListener('click', function(){ window.print(); });
+  if(acPdf) acPdf.addEventListener('click', function(){ window.print(); });
 
   /* ── scroll-spy on the nav buttons ── */
   var links = Array.prototype.slice.call(document.querySelectorAll('.nav a'));

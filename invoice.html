@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Invoice - Advance Payment - Sangamner 360</title>
+<title>पावती / Receipt - Advance Payment ₹59,000 - Sangamner 360</title>
 <style>
 /* ═══════════ TOKENS ═══════════ */
 :root{
@@ -128,6 +128,7 @@ tbody tr:last-child td{border-bottom:0}
 td.num,th.num{text-align:right; white-space:nowrap}
 td.num{font-weight:600; color:var(--ink)}
 td.k{font-weight:600; color:var(--ink)}
+td.c,th.c{text-align:center}
 tr.total td{background:var(--bronze-soft); font-weight:700; color:var(--ink);
   border-top:2px solid var(--bronze); border-bottom:0; font-size:1rem;
   -webkit-print-color-adjust:exact; print-color-adjust:exact}
@@ -146,6 +147,28 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
 .due__w{font-size:.85rem; color:var(--ink-soft); margin:0}
 .due__a{font-family:var(--serif); font-size:clamp(1.7rem,5vw,2.4rem); font-weight:700;
   color:var(--ink); line-height:1; letter-spacing:-.01em}
+
+/* ═══════════ PAID (भरणा झाला) ═══════════ */
+.due--paid{background:var(--sage-soft); border-color:var(--sage)}
+.due--paid .due__l{color:var(--sage)}
+.due--paid .due__a{color:var(--sage); text-decoration:none}
+.paidstamp{display:flex; align-items:center; gap:1rem; flex-wrap:wrap;
+  padding:1.05rem 1.3rem; margin-bottom:1.5rem; border:2.5px solid var(--sage);
+  border-radius:4px; background:var(--sage-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.paidstamp__tick{font-size:2.1rem; line-height:1; color:var(--sage); font-weight:700; flex-shrink:0}
+.paidstamp__in{flex:1; min-width:12rem}
+.paidstamp__in strong{display:block; font-family:var(--serif); font-size:1.06rem;
+  color:var(--ink); margin-bottom:.15rem}
+.paidstamp__in span{font-size:.83rem; color:var(--muted)}
+.paidstamp__badge{font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:#fff; background:var(--sage); border-radius:3px; padding:.35rem .75rem; flex-shrink:0;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+tr.is-paid td{background:var(--sage-soft); -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.paidtag{display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.06em;
+  color:var(--sage); border:1px solid var(--sage); border-radius:3px; padding:.15rem .45rem;
+  margin-left:.4rem; white-space:nowrap;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
 
 /* ═══════════ SECTION HEADS ═══════════ */
 .sh{display:flex; align-items:baseline; gap:.7rem; margin:2rem 0 .8rem}
@@ -222,9 +245,106 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
   color:var(--bronze); border:1px solid var(--bronze); padding:.5rem .85rem; border-radius:3px;
   -webkit-print-color-adjust:exact; print-color-adjust:exact}
 
+/* ═══════════ RECEIPT HERO ═══════════ */
+.rcpt{position:relative; padding:1.5rem 1.6rem; margin-bottom:1.75rem;
+  border:2.5px solid var(--sage); border-radius:5px; background:var(--sage-soft);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.rcpt::after{content:"PAID"; position:absolute; top:.9rem; right:1.1rem;
+  font-family:var(--serif); font-size:clamp(1.6rem,6vw,2.6rem); font-weight:700;
+  letter-spacing:.16em; color:var(--sage); opacity:.22; transform:rotate(-12deg);
+  pointer-events:none; -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.rcpt__k{display:block; font-size:.72rem; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--sage); margin-bottom:.6rem}
+.rcpt__l{font-size:.9rem; color:var(--ink-soft); margin:0 0 .8rem; max-width:62ch; line-height:1.65}
+.rcpt__amt{font-family:var(--serif); font-size:clamp(2rem,7vw,3rem); font-weight:700;
+  color:var(--sage); line-height:1; letter-spacing:-.01em; margin-bottom:.5rem}
+.rcpt__w{font-size:.84rem; color:var(--muted); margin:0 0 .9rem}
+.rcpt__actions{display:flex; flex-wrap:wrap; gap:.7rem; align-items:center;
+  margin-top:1.1rem; padding-top:.9rem; border-top:1px solid var(--sage)}
+.rcpt__hint{font-size:.8rem; color:var(--ink-soft)}
+
+/* ═══════════ PAYMENT PROOF SCREENSHOTS ═══════════ */
+.proofs{display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:1rem; margin-bottom:1.5rem}
+.proof{border:1.5px solid var(--line-strong); border-radius:4px; background:var(--surface);
+  padding:.8rem; break-inside:avoid; page-break-inside:avoid}
+.proof__k{display:block; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--sage); margin-bottom:.5rem}
+.proof__img{display:block; width:100%; height:auto; max-height:30rem; object-fit:contain;
+  border:1px solid var(--line); border-radius:3px; background:var(--band)}
+.proof__cap{font-size:.78rem; color:var(--muted); margin:.55rem 0 0; line-height:1.55}
+.proof__miss{display:none; padding:2.2rem 1rem; text-align:center; font-size:.82rem;
+  color:var(--muted); border:1.5px dashed var(--line-strong); border-radius:3px;
+  background:var(--band); line-height:1.7}
+.proof.is-missing .proof__img{display:none}
+.proof.is-missing .proof__miss{display:block}
+.txid{font-family:var(--mono); font-size:.94em; color:var(--ink); letter-spacing:.02em}
+
+/* ═══════════ DOCUMENT SPLIT (Invoice | Receipt) ═══════════ */
+.docsplit{display:flex; align-items:center; gap:1rem; margin:2.5rem 0 2rem;
+  font-size:.72rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--sage); white-space:nowrap}
+.docsplit::before,.docsplit::after{content:""; flex:1; height:0;
+  border-top:2px dashed var(--sage); opacity:.65}
+.docsplit span{flex-shrink:0}
+.docend{display:flex; flex-wrap:wrap; gap:.7rem; align-items:center;
+  margin:1.4rem 0 .5rem; padding-top:1rem; border-top:1px solid var(--line)}
+.jump{color:var(--sage); font-weight:700; text-decoration:none;
+  border-bottom:1.5px solid var(--sage)}
+.jump:hover{color:var(--ink); border-color:var(--ink)}
+
+/* ═══════════ SIGNATURE / SEAL ═══════════ */
+.sign{display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap;
+  gap:1.5rem; margin:1.5rem 0; padding:1.2rem 1.35rem;
+  border:1.5px solid var(--line-strong); border-radius:4px; background:var(--band);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.sign__k{display:block; font-size:.7rem; font-weight:700; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:.5rem}
+.sign__n{font-family:var(--serif); font-size:1.05rem; font-weight:700;
+  color:var(--ink); margin:0 0 .2rem}
+.sign__d{font-size:.8rem; color:var(--muted); margin:0}
+.sign__seal{display:flex; flex-direction:column; align-items:center; justify-content:center;
+  min-width:8.5rem; padding:.8rem 1.1rem; border:2.5px solid var(--sage); border-radius:50%;
+  aspect-ratio:1/1; font-family:var(--serif); font-size:1.15rem; font-weight:700;
+  letter-spacing:.08em; color:var(--sage); transform:rotate(-8deg);
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.sign__seal span{font-size:.82rem; letter-spacing:0; margin-top:.2rem}
+
+/* ═══════════ COLLAPSED PAYMENT DETAILS ═══════════ */
+.paydetails{border:1.5px solid var(--line-strong); border-radius:4px;
+  background:var(--band); margin-bottom:1.5rem;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact}
+.paydetails__s{cursor:pointer; padding:.85rem 1.1rem; font-size:.86rem; font-weight:600;
+  color:var(--ink-soft); list-style:none}
+.paydetails__s::-webkit-details-marker{display:none}
+.paydetails__s::before{content:"▸ "; color:var(--indigo); font-weight:700}
+.paydetails[open] .paydetails__s::before{content:"▾ "}
+.paydetails__s:hover{color:var(--ink)}
+.paydetails__in{padding:0 1.1rem 1.1rem; border-top:1px solid var(--line)}
+.paydetails__in > :first-child{margin-top:1.1rem}
+
 /* ═══════════ PRINT ═══════════ */
 @page{size:A4; margin:13mm 12mm}
 @media print{
+  .screen-only{display:none !important}
+  .rcpt,.proofs,.proof,.paidstamp,.sign{break-inside:avoid; page-break-inside:avoid}
+  .proof__img{max-height:14cm}
+  /* छापताना पेमेंट तपशील उघडे दिसू नयेत */
+  .paydetails{display:none !important}
+
+  /* ── स्वतंत्र PDF - एका वेळी एकच दस्तऐवज ──
+     Invoice PDF दाबल्यास फक्त Invoice, पावती PDF दाबल्यास फक्त पावती छापली जाते.
+     कोणतेही बटण न दाबता थेट Ctrl+P केल्यास दोन्ही दस्तऐवज छापले जातील. */
+  body.print-invoice .doc--receipt,
+  body.print-invoice .docsplit{display:none !important}
+  body.print-receipt .doc--invoice,
+  body.print-receipt .docsplit{display:none !important}
+
+  /* दोन्ही एकत्र छापताना पावती नव्या पानावर सुरू व्हावी */
+  .doc--receipt{break-before:page; page-break-before:always}
+  body.print-invoice .doc--receipt,
+  body.print-receipt .doc--receipt{break-before:auto; page-break-before:auto}
+  .docsplit{display:none !important}
   :root{
     --ink:#111827; --ink-soft:#1F2937; --muted:#4B5563; --faint:#6B7280;
     --paper:#fff; --surface:#fff; --band:#F3F4F8;
@@ -314,10 +434,11 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
 <div class="bar">
   <div class="bar__in">
     <svg class="bar__logo" viewBox="0 0 500 500" role="img" aria-label="MID-SUN"><use href="#midsun-logo"/></svg>
-    <div class="bar__id">Ghorpadepatil &amp; Team<span>Sangamner 360 · Advance Payment Invoice</span></div>
+    <div class="bar__id">Ghorpadepatil &amp; Team<span>Sangamner 360 · Invoice + Receipt · ₹59,000 PAID</span></div>
     <div class="bar__sp"></div>
     <button class="btn" id="themeBtn" type="button">डार्क / लाइट</button>
-    <button class="btn btn--primary" id="pdfBtn" type="button">⭳ Download PDF</button>
+    <button class="btn" id="pdfInvoice" type="button">⭳ Invoice PDF</button>
+    <button class="btn btn--primary" id="pdfReceipt" type="button">⭳ पावती PDF</button>
   </div>
 </div>
 
@@ -336,17 +457,29 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
   </div>
 </div>
 
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  दस्तऐवज १ · देयक (INVOICE)                                  ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<section class="doc doc--invoice" id="docInvoice">
+
 <div class="invhead">
   <div>
     <p class="invhead__s">App Research, Design &amp; Development · Advance Payment 10%</p>
-    <h1 class="invhead__t">देयक / INVOICE</h1>
+    <h1 class="invhead__t">देयक / INVOICE <span class="paidtag" style="font-size:.5em; vertical-align:middle">✓ PAID</span></h1>
   </div>
   <div class="invmeta">
     <!-- ↓ Invoice क्रमांक व तारखा येथे बदला ↓ -->
     <div class="invmeta__row"><div class="invmeta__k">Invoice No.</div><div class="invmeta__v">KPT / 2026-27 / 001</div></div>
     <div class="invmeta__row"><div class="invmeta__k">Invoice दिनांक</div><div class="invmeta__v">02 / 08 / 2026</div></div>
-    <div class="invmeta__row"><div class="invmeta__k">देय दिनांक</div><div class="invmeta__v">त्वरित (On Receipt)</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">भरणा दिनांक</div><div class="invmeta__v">02 / 08 / 2026</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">स्थिती</div><div class="invmeta__v"><span class="paidtag">✓ PAID · भरणा पूर्ण</span></div></div>
   </div>
+</div>
+
+<div class="note note--yes screen-only">
+  <span class="note__t">✓ या देयकाचा भरणा पूर्ण झाला आहे</span>
+  <p>हे मूळ देयक (Invoice) केवळ नोंदीसाठी कायम ठेवले आहे. याची <strong>पूर्ण रक्कम ₹59,000 प्राप्त झाली</strong> असून त्याची अधिकृत <strong>पावती (Receipt) या पानाच्या शेवटी जोडलेली आहे</strong>.</p>
+  <p style="margin-top:.5rem"><a class="jump" href="#docReceipt">↓ थेट पावतीकडे जा</a></p>
 </div>
 
 <div class="parties">
@@ -389,62 +522,93 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
       </tr>
       <tr class="total">
         <td class="num">-</td>
-        <td>एकूण देय रक्कम (Total Due)</td>
+        <td>एकूण रक्कम (Total)</td>
         <td class="num">₹59,000</td>
+      </tr>
+      <tr class="total is-paid">
+        <td class="num">-</td>
+        <td>वजा - प्राप्त झालेली रक्कम (₹100 + ₹58,900)</td>
+        <td class="num">- ₹59,000</td>
+      </tr>
+      <tr class="total">
+        <td class="num">-</td>
+        <td>शिल्लक देय रक्कम (Balance Due)</td>
+        <td class="num">₹0</td>
       </tr>
     </tbody>
     <caption>अक्षरी: <strong>एकोणसाठ हजार रुपये फक्त</strong> · In words: <strong>Rupees Fifty Nine Thousand Only</strong></caption>
   </table>
 </div>
 
-<div class="due">
-  <div>
-    <p class="due__l">आता भरावयाची रक्कम</p>
-    <p class="due__w">हे देयक प्राप्त झाल्यानंतरच प्रकल्पाचे काम सुरू करण्यात येईल.</p>
+<div class="paidstamp">
+  <span class="paidstamp__tick">✓</span>
+  <div class="paidstamp__in">
+    <strong>देयक पूर्णपणे प्राप्त झाले - ₹59,000/-</strong>
+    <span>₹100 (चाचणी रक्कम) + ₹58,900 (उर्वरित रक्कम) = ₹59,000 · दोन्ही टप्पे पूर्ण · दिनांक 02 / 08 / 2026</span>
   </div>
-  <div class="due__a">₹59,000/-</div>
+  <span class="paidstamp__badge">✓ Paid in Full</span>
 </div>
 
-<!-- ═══════════ TWO-STEP PAYMENT ═══════════ -->
-<div class="sh"><span class="sh__n">१</span><h2 class="sh__t">पैसे कसे पाठवावेत - दोन टप्प्यांत</h2></div>
+<div class="due due--paid">
+  <div>
+    <p class="due__l">शिल्लक देय रक्कम</p>
+    <p class="due__w">संपूर्ण Advance Payment प्राप्त झाले असून प्रकल्पाचे काम सुरू करण्यात आले आहे. <strong>आणखी कोणतीही रक्कम या टप्प्यासाठी भरण्याची आवश्यकता नाही.</strong></p>
+  </div>
+  <div class="due__a">₹0/-</div>
+</div>
+
+<!-- ═══════════ TWO-STEP PAYMENT · पूर्ण झाले ═══════════ -->
+<div class="sh"><span class="sh__n">१</span><h2 class="sh__t">पेमेंटचे दोन्ही टप्पे - पूर्ण झाले</h2></div>
 
 <div class="note note--yes">
-  <span class="note__t">सुरक्षिततेसाठी दोन टप्प्यांत पेमेंट</span>
-  <p>पूर्ण रक्कम एकाच वेळी पाठवू नये. <strong>प्रथम फक्त ₹100</strong> ही चाचणी रक्कम (Test Payment) पाठवावी. ती आम्हाला मिळाल्याची <strong>पुष्टी (Confirmation)</strong> आम्ही WhatsApp किंवा Email वर देऊ. त्यानंतरच उर्वरित <strong>₹58,900</strong> ही रक्कम पाठवावी.</p>
-  <p>यामुळे खाते क्रमांक, UPI ID किंवा Wallet Address चुकीचा असल्यास मोठी रक्कम अडकून पडण्याचा धोका पूर्णपणे टळतो.</p>
+  <span class="note__t">दोन टप्प्यांतील पेमेंट यशस्वीरीत्या पूर्ण</span>
+  <p>सुरक्षिततेसाठी ठरल्याप्रमाणे प्रथम <strong>₹100</strong> ही चाचणी रक्कम (Test Payment) पाठवण्यात आली, ती आम्हाला मिळाल्याची पुष्टी देण्यात आली, आणि त्यानंतर उर्वरित <strong>₹58,900</strong> ही रक्कमही प्राप्त झाली.</p>
+  <p><strong>एकूण ₹100 + ₹58,900 = ₹59,000</strong> ही संपूर्ण रक्कम आमच्याकडे जमा झाली आहे. खालील तक्ता केवळ नोंदीसाठी (Record) दिला आहे - <strong>पुन्हा पेमेंट करण्याची गरज नाही</strong>.</p>
 </div>
 
 <div class="tbl">
   <table>
     <thead>
-      <tr><th class="num">टप्पा</th><th>काय करावे</th><th class="num">रक्कम</th></tr>
+      <tr><th class="num">टप्पा</th><th>तपशील</th><th class="num">रक्कम</th><th class="c">स्थिती</th></tr>
     </thead>
     <tbody>
-      <tr class="step1">
+      <tr class="is-paid">
         <td class="num">१</td>
-        <td class="k">चाचणी रक्कम (Test Payment) पाठवा
-          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">पाठवल्यानंतर Screenshot किंवा Transaction ID आम्हाला पाठवा</span>
+        <td class="k">चाचणी रक्कम (Test Payment) पाठवली
+          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">प्राप्त झाल्याची पुष्टी देण्यात आली</span>
         </td>
         <td class="num">₹100</td>
+        <td class="c"><span class="paidtag">✓ प्राप्त</span></td>
       </tr>
-      <tr>
+      <tr class="is-paid">
         <td class="num">२</td>
-        <td class="k">आमची पुष्टी मिळाल्यानंतर उर्वरित रक्कम पाठवा
-          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">₹100 मिळाल्याचे आम्ही कळवल्याशिवाय ही रक्कम पाठवू नये</span>
+        <td class="k">पुष्टीनंतर उर्वरित रक्कम पाठवली
+          <br><span style="font-weight:400; color:var(--muted); font-size:.9em">प्राप्त झाल्याची पुष्टी देण्यात आली</span>
         </td>
         <td class="num">₹58,900</td>
+        <td class="c"><span class="paidtag">✓ प्राप्त</span></td>
       </tr>
       <tr class="total">
         <td class="num">-</td>
         <td>एकूण (₹100 + ₹58,900)</td>
         <td class="num">₹59,000</td>
+        <td class="c"><span class="paidtag">✓ पूर्ण भरणा</span></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- ═══════════ PAYMENT METHODS ═══════════ -->
-<div class="sh"><span class="sh__n">२</span><h2 class="sh__t">पैसे भरण्याचे पर्याय</h2></div>
+<!-- ═══════════ PAYMENT METHODS · फक्त नोंदीसाठी, बंद ठेवलेले ═══════════ -->
+<div class="sh"><span class="sh__n">२</span><h2 class="sh__t">पेमेंट तपशील <span style="font-size:.72rem; font-weight:700; letter-spacing:.06em; color:var(--muted)">(फक्त नोंदीसाठी)</span></h2></div>
+
+<details class="paydetails">
+  <summary class="paydetails__s">पुढील टप्प्यांसाठीचे पेमेंट तपशील पाहा (UPI, QR, Bank, Crypto) - उघडण्यासाठी Click करा</summary>
+  <div class="paydetails__in">
+
+<div class="note note--yes">
+  <span class="note__t">✓ या टप्प्याचा भरणा पूर्ण झाला आहे</span>
+  <p>खालील सर्व माहिती - UPI, QR, Bank व Crypto - <strong>केवळ नोंदीसाठी व पुढील टप्प्यांच्या सोयीसाठी</strong> कायम ठेवली आहे. <strong>या Advance Payment टप्प्यासाठी पुन्हा पैसे पाठवू नयेत.</strong></p>
+</div>
 
 <div class="note note--yes">
   <span class="note__t">स्वीकारली जाणारी चलने (Accepted Currencies)</span>
@@ -551,6 +715,9 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
   <p><strong>६.</strong> पाठवल्यानंतर <strong>Transaction ID (TXID)</strong> आम्हाला पाठवावा. Blockchain वर व्यवहार confirm झाल्यानंतरच देयक प्राप्त झाले असे मानले जाईल.</p>
 </div>
 
+  </div>
+</details>
+
 <!-- ═══════════ TERMS ═══════════ -->
 <div class="sh"><span class="sh__n">३</span><h2 class="sh__t">अटी (Terms)</h2></div>
 <div class="tbl">
@@ -558,14 +725,167 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
     <thead><tr><th class="num">क्र</th><th>अट</th></tr></thead>
     <tbody>
       <tr><td class="num">१</td><td>हे देयक <strong>Sangamner 360</strong> या प्रकल्पाच्या करारानुसार पहिल्या टप्प्याचे (Advance - 10%) आहे.</td></tr>
-      <tr><td class="num">२</td><td>संपूर्ण <strong>₹59,000</strong> प्राप्त झाल्यानंतरच प्रकल्पाचे प्रत्यक्ष काम सुरू करण्यात येईल.</td></tr>
-      <tr><td class="num">३</td><td>प्रथम <strong>₹100</strong> चाचणी रक्कम पाठवावी; आमची पुष्टी मिळाल्यानंतरच उर्वरित <strong>₹58,900</strong> पाठवावेत.</td></tr>
+      <tr><td class="num">२</td><td>संपूर्ण <strong>₹59,000</strong> प्राप्त झाले असून प्रकल्पाचे प्रत्यक्ष काम <strong>सुरू करण्यात आले आहे</strong>.</td></tr>
+      <tr><td class="num">३</td><td>ठरल्याप्रमाणे प्रथम <strong>₹100</strong> चाचणी रक्कम व नंतर उर्वरित <strong>₹58,900</strong> अशा दोन्ही टप्प्यांतील रकमा प्राप्त झाल्या आहेत. <strong>पुन्हा पेमेंट करण्याची आवश्यकता नाही.</strong></td></tr>
       <tr><td class="num">४</td><td>Hosting, Domain, Server, Google Play, Apple Developer व इतर Third-Party खर्च या रकमेत <strong>समाविष्ट नाहीत</strong>.</td></tr>
       <tr><td class="num">५</td><td>पैसे भरल्यानंतर Payment Receipt उपलब्ध करून देण्यात येईल.</td></tr>
-      <tr><td class="num">६</td><td>कोणतीही शंका असल्यास वरील Email किंवा WhatsApp क्रमांकावर संपर्क साधावा.</td></tr>
+      <tr><td class="num">६</td><td>या देयकाची अधिकृत <strong>पावती (Receipt)</strong> या पानाच्या शेवटी जोडलेली आहे.</td></tr>
+      <tr><td class="num">७</td><td>कोणतीही शंका असल्यास वरील Email किंवा WhatsApp क्रमांकावर संपर्क साधावा.</td></tr>
     </tbody>
   </table>
 </div>
+
+<div class="docend screen-only">
+  <button class="btn" id="dlInvoice" type="button">⭳ फक्त हे Invoice Download करा (PDF)</button>
+  <span class="rcpt__hint">Print चौकटीत <strong>“Save as PDF”</strong> निवडा - पावती वेगळी राहील.</span>
+</div>
+
+</section><!-- /दस्तऐवज १ · INVOICE -->
+
+
+<!-- ╔══════════════════════════════════════════════════════════════╗
+     ║  दस्तऐवज २ · पावती (RECEIPT) - देयकास जोडलेली                ║
+     ╚══════════════════════════════════════════════════════════════╝ -->
+<div class="docsplit" aria-hidden="true"><span>✂ येथून पुढे - जोडलेली पावती (Attached Receipt)</span></div>
+
+<section class="doc doc--receipt" id="docReceipt">
+
+<div class="invhead">
+  <div>
+    <p class="invhead__s">वरील देयक क्रमांक KPT / 2026-27 / 001 ला जोडलेली अधिकृत पावती</p>
+    <h1 class="invhead__t">पावती / RECEIPT <span class="paidtag" style="font-size:.5em; vertical-align:middle">✓ PAID</span></h1>
+  </div>
+  <div class="invmeta">
+    <!-- ↓ पावती क्रमांक व तारखा येथे बदला ↓ -->
+    <div class="invmeta__row"><div class="invmeta__k">Receipt No.</div><div class="invmeta__v">KPT / 2026-27 / R-001</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">संदर्भ Invoice</div><div class="invmeta__v">KPT / 2026-27 / 001</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">भरणा दिनांक</div><div class="invmeta__v">02 / 08 / 2026</div></div>
+    <div class="invmeta__row"><div class="invmeta__k">स्थिती</div><div class="invmeta__v"><span class="paidtag">✓ PAID · भरणा पूर्ण</span></div></div>
+  </div>
+</div>
+
+<!-- ═══════════ RECEIPT HERO ═══════════ -->
+<div class="rcpt">
+  <span class="rcpt__k">रक्कम मिळाल्याची अधिकृत पावती</span>
+  <p class="rcpt__l">Ghorpadepatil &amp; Team यांना <strong>Mr. Pritam Jadhav</strong> यांच्याकडून <strong>Sangamner 360</strong> या प्रकल्पाच्या करारानुसार Advance Payment (10%) ची खालील रक्कम पूर्णपणे प्राप्त झाली आहे -</p>
+  <div class="rcpt__amt">₹59,000/-</div>
+  <p class="rcpt__w">अक्षरी: <strong>एकोणसाठ हजार रुपये फक्त</strong> · In words: <strong>Rupees Fifty Nine Thousand Only</strong></p>
+  <p class="rcpt__l">ही रक्कम <strong>₹100</strong> (चाचणी रक्कम) + <strong>₹58,900</strong> (उर्वरित रक्कम) अशा दोन टप्प्यांत, दिनांक <strong>02 / 08 / 2026</strong> रोजी प्राप्त झाली. यासाठी आणखी कोणतीही रक्कम देय नाही.</p>
+  <div class="rcpt__actions screen-only">
+    <button class="btn btn--primary" id="dlReceipt" type="button">⭳ फक्त ही पावती Download करा (PDF)</button>
+    <span class="rcpt__hint">बटण दाबल्यावर Print चौकट उघडेल - तेथे <strong>“Save as PDF”</strong> निवडा.</span>
+  </div>
+</div>
+
+<div class="parties">
+  <div class="parties__c">
+    <span class="parties__k">रक्कम कोणाला मिळाली (Received By)</span>
+    <p class="parties__n">Ghorpadepatil &amp; Team</p>
+    <p class="parties__d">
+      App Research, Design &amp; Development<br>
+      <a href="mailto:kgpatilmail@gmail.com">kgpatilmail@gmail.com</a><br>
+      <a href="mailto:midsungroupmail@gmail.com">midsungroupmail@gmail.com</a><br>
+      <a href="tel:9404423429">9404423429</a> (Primary · WhatsApp)<br>
+      <a href="tel:9684008406">9684008406</a> (Call / WhatsApp)
+    </p>
+  </div>
+  <div class="parties__c">
+    <span class="parties__k">रक्कम कोणाकडून मिळाली (Received From)</span>
+    <p class="parties__n">Mr. Pritam Jadhav</p>
+    <p class="parties__d">
+      Sangamner, Dist: Ahilyanagar,<br>
+      Maharashtra State, India<br>
+      प्रकल्प: Sangamner 360
+    </p>
+  </div>
+</div>
+
+<div class="paidstamp">
+  <span class="paidstamp__tick">✓</span>
+  <div class="paidstamp__in">
+    <strong>रक्कम पूर्णपणे प्राप्त झाली - ₹59,000/-</strong>
+    <span>₹100 (चाचणी रक्कम) + ₹58,900 (उर्वरित रक्कम) = ₹59,000 · दोन्ही टप्पे पूर्ण · दिनांक 02 / 08 / 2026</span>
+  </div>
+  <span class="paidstamp__badge">✓ Paid in Full</span>
+</div>
+
+<!-- ═══════════ TRANSACTIONS ═══════════ -->
+<div class="sh"><span class="sh__n">R१</span><h2 class="sh__t">व्यवहाराचा तपशील (Transaction Details)</h2></div>
+<div class="tbl">
+  <table>
+    <thead>
+      <tr><th class="num">क्र</th><th>दिनांक व वेळ</th><th>UPI Transaction ID</th><th class="num">रक्कम</th><th class="c">स्थिती</th></tr>
+    </thead>
+    <tbody>
+      <tr class="is-paid"><td class="num">१</td><td>2 Aug 2026 · 9:21 pm</td><td><span class="txid">348431180379</span></td><td class="num">₹100</td><td class="c"><span class="paidtag">✓ Completed</span></td></tr>
+      <tr class="is-paid"><td class="num">२</td><td>2 Aug 2026 · 9:25 pm</td><td><span class="txid">301618620983</span></td><td class="num">₹58,900</td><td class="c"><span class="paidtag">✓ Completed</span></td></tr>
+      <tr class="total"><td class="num">-</td><td colspan="2">एकूण प्राप्त रक्कम (₹100 + ₹58,900)</td><td class="num">₹59,000</td><td class="c"><span class="paidtag">✓ पूर्ण भरणा</span></td></tr>
+    </tbody>
+    <caption>दोन्ही व्यवहार State Bank of India 3884 या खात्यात जमा झाले असून त्यांची स्थिती <strong>Completed</strong> आहे.</caption>
+  </table>
+</div>
+
+<!-- ═══════════ PAYMENT PROOF ═══════════ -->
+<div class="sh"><span class="sh__n">R२</span><h2 class="sh__t">रक्कम मिळाल्याचा पुरावा (Payment Proof)</h2></div>
+<p style="font-size:.85rem; color:var(--ink-soft); margin:0 0 1rem">
+  रक्कम प्राप्त झाल्याचे खालील Screenshots नोंदीसाठी जोडले आहेत.
+</p>
+
+<div class="proofs">
+  <figure class="proof" id="proof1">
+    <span class="proof__k">Screenshot १ · चाचणी रक्कम ₹100</span>
+    <img class="proof__img" src="1ss.jpeg" alt="₹100 चाचणी रक्कम मिळाल्याचा PhonePe Screenshot - Completed" loading="lazy">
+    <div class="proof__miss">Screenshot फाईल सापडली नाही -
+      <strong>1ss.jpeg</strong> ही फाईल याच Folder मध्ये असल्याची खात्री करा.</div>
+    <figcaption class="proof__cap">
+      <strong>₹100</strong> · चाचणी रक्कम (Test Payment) · <strong>Completed</strong><br>
+      2 Aug 2026, 9:21 pm · PhonePe · State Bank of India 3884<br>
+      UPI Transaction ID · <span class="txid">348431180379</span>
+    </figcaption>
+  </figure>
+
+  <figure class="proof" id="proof2">
+    <span class="proof__k">Screenshot २ · उर्वरित रक्कम ₹58,900</span>
+    <img class="proof__img" src="2ss.jpeg" alt="₹58,900 उर्वरित रक्कम मिळाल्याचा PhonePe Screenshot - Completed" loading="lazy">
+    <div class="proof__miss">Screenshot फाईल सापडली नाही -
+      <strong>2ss.jpeg</strong> ही फाईल याच Folder मध्ये असल्याची खात्री करा.</div>
+    <figcaption class="proof__cap">
+      <strong>₹58,900</strong> · उर्वरित रक्कम · <em>“First payment sangamner 360”</em> · <strong>Completed</strong><br>
+      2 Aug 2026, 9:25 pm · State Bank of India 3884<br>
+      UPI Transaction ID · <span class="txid">301618620983</span>
+    </figcaption>
+  </figure>
+</div>
+
+<!-- ═══════════ RECEIPT DECLARATION ═══════════ -->
+<div class="sh"><span class="sh__n">R३</span><h2 class="sh__t">घोषणा (Declaration)</h2></div>
+<div class="tbl">
+  <table>
+    <tbody>
+      <tr><td class="num">१</td><td>वर नमूद <strong>₹59,000/-</strong> ही संपूर्ण रक्कम Ghorpadepatil &amp; Team यांना प्राप्त झाल्याचे या पावतीद्वारे मान्य करण्यात येते.</td></tr>
+      <tr><td class="num">२</td><td>ही रक्कम <strong>Sangamner 360</strong> प्रकल्पाच्या करारातील <strong>पहिल्या टप्प्याची (Advance - 10%)</strong> असून त्यासाठीचे संपूर्ण देयक यामुळे <strong>निरंक (₹0)</strong> झाले आहे.</td></tr>
+      <tr><td class="num">३</td><td>ही पावती मिळाल्यानंतर प्रकल्पाचे प्रत्यक्ष काम <strong>सुरू करण्यात आले आहे</strong>.</td></tr>
+      <tr><td class="num">४</td><td>करारातील पुढील टप्पे (30% + 30% + 30%) यांचे देयक व पावत्या स्वतंत्रपणे दिल्या जातील.</td></tr>
+      <tr><td class="num">५</td><td>ही Computer द्वारे तयार केलेली पावती असून तिला स्वाक्षरीची आवश्यकता नाही.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="sign">
+  <div class="sign__b">
+    <span class="sign__k">रक्कम स्वीकारणारे (Received By)</span>
+    <p class="sign__n">Ghorpadepatil &amp; Team</p>
+    <p class="sign__d">दिनांक · 02 / 08 / 2026 · Sangamner 360</p>
+  </div>
+  <div class="sign__seal">✓ PAID<span>₹59,000/-</span></div>
+</div>
+
+<div class="docend screen-only">
+  <button class="btn btn--primary" id="dlReceipt2" type="button">⭳ फक्त ही पावती Download करा (PDF)</button>
+  <span class="rcpt__hint">Invoice वेगळे हवे असल्यास वरील <strong>“⭳ Invoice PDF”</strong> बटण वापरा.</span>
+</div>
+
+</section><!-- /दस्तऐवज २ · RECEIPT -->
 
 <footer class="foot">
   <div class="foot__b">
@@ -577,7 +897,8 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
   </div>
   <div class="foot__b">
     <strong>Sangamner 360</strong>
-    Advance Payment Invoice - 10%<br>
+    Advance Payment Receipt - 10% · <strong>PAID ✓</strong><br>
+    ₹100 + ₹58,900 = ₹59,000 प्राप्त · 02 / 08 / 2026<br>
     Prepared for Mr. Pritam Jadhav
   </div>
 </footer>
@@ -587,7 +908,36 @@ caption{caption-side:bottom; text-align:left; font-size:.78rem; color:var(--mute
 <script>
 (function(){
   var root = document.documentElement;
-  document.getElementById('pdfBtn').addEventListener('click', function(){ window.print(); });
+
+  /* ── स्वतंत्र PDF: छापण्यापूर्वी body वर वर्ग लावा, नंतर काढून टाका ──
+     'invoice' → फक्त देयक · 'receipt' → फक्त पावती · काहीही नाही → दोन्ही */
+  function printOnly(which){
+    var cls = which === 'invoice' ? 'print-invoice' : 'print-receipt';
+    document.body.classList.add(cls);
+    function cleanup(){
+      document.body.classList.remove('print-invoice', 'print-receipt');
+      window.removeEventListener('afterprint', cleanup);
+    }
+    window.addEventListener('afterprint', cleanup);
+    /* afterprint न मिळाल्यास (काही Browsers) सुरक्षिततेसाठी */
+    setTimeout(cleanup, 60000);
+    window.print();
+  }
+
+  [['pdfInvoice','invoice'], ['dlInvoice','invoice'],
+   ['pdfReceipt','receipt'], ['dlReceipt','receipt'], ['dlReceipt2','receipt']
+  ].forEach(function(pair){
+    var el = document.getElementById(pair[0]);
+    if(el) el.addEventListener('click', function(){ printOnly(pair[1]); });
+  });
+
+  /* Screenshot फाईल नसल्यास सुबक सूचना दाखवा - तुटलेले चित्र नको */
+  document.querySelectorAll('.proof').forEach(function(fig){
+    var img = fig.querySelector('.proof__img');
+    if(!img) return;
+    img.addEventListener('error', function(){ fig.classList.add('is-missing'); });
+    if(img.complete && img.naturalWidth === 0) fig.classList.add('is-missing');
+  });
 
   /* ── Copy बटणे (UPI ID वगैरे) ── */
   document.querySelectorAll('.copybtn').forEach(function(btn){
